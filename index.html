@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 90vh
+        }
+
+        .sidebar {
+            z-index: 3;
+            display: flex;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            height: 90vh;
+            overflow: auto;
+            width: 300px;
+            background-color: white;
+            transition: top 0.5s ease-in-out;
+        }
+
+        .sidebar>label {
+            padding: 10px;
+
+        }
+
+        .sidebar>select {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .position {
+
+            background-color: #c7c7c7;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .players {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .player {
+            padding: 10px;
+            font-size: 17px;
+            text-decoration: none;
+            cursor: pointer;
+            border: 0;
+            outline: none;
+            text-align: center;
+        }
+
+        .player:hover {
+            background-color: #dfdfdf;
+        }
+
+        .position {
+            text-align: center;
+            border-bottom: solid rgba(0, 0, 0, 0.151) 2px;
+
+        }
+
+
+
+        .title :target {
+            outline: thick;
+
+        }
+
+        .main-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(77, 77, 77);
+            height: 90vh;
+            width: 100%;
+            overflow: hidden;
+            /* border: solid 1px red; */
+        }
+
+        .field {
+            display: flex;
+            justify-content: center;
+        }
+
+        .title {
+            color: white;
+            text-align: center;
+            border: 0;
+            border: solid 1px transparent;
+            border-radius: 10px;
+            outline: none;
+            font-size: 32px;
+            background-color: transparent;
+            height: max-content;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .title:focus {
+            border: solid 1px rgba(255, 255, 255, 0.562);
+        }
+
+        .field {
+            width: 100%;
+            height: 100%;
+            /* border: solid 1px rgb(217, 255, 0); */
+            max-width: 95vh;
+            max-height: 100%;
+            background-image: url("./img/campo.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .screenshot-area {
+            align-items: center;
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            /* border: solid  1px blue; */
+            max-width: 100vh;
+
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border: solid;
+        }
+
+        .toggle-sidebar-button {
+            display: none
+        }
+
+        .main-header {
+            z-index: 2;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 10vh;
+            background-color: rgb(53, 50, 50);
+            color: white;
+
+        }
+
+        .download-button {
+            border: 0;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 0 30px;
+            font-size: 17px;
+            background-color: rgb(83, 205, 209);
+            border-bottom: solid 3px rgb(71, 154, 158);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .download-button:active {
+            border-bottom: 0;
+
+        }
+
+        .main-title {
+            margin: 0 30px;
+            font-size: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-shadow: 1px 1px 3px black;
+
+        }
+
+        @media all and (max-width: 700px) {
+            body {
+                overflow: hidden;
+            }
+
+            .container {
+                flex-direction: column-reverse;
+            }
+
+            .main-area {
+                height: 100%;
+            }
+
+            .sidebar {
+                position: absolute;
+                top: 100%;
+                display: flex;
+                width: 100%;
+                height: 100vh;
+
+            }
+
+            .field {
+                background-size: 125%;
+            }
+
+            .toggle-sidebar-button {
+                z-index: 4;
+                display: block;
+                padding: 10px;
+                font-size: 15px;
+                font-weight: bold;
+                width: 100%;
+                border: 0;
+                background-color: rgb(83, 205, 209);
+                color: rgb(0, 0, 0);
+                outline: none;
+                cursor: pointer;
+            }
+
+            .main-title {
+                font-size: 20px;
+            }
+
+            .download-button {
+                font-size: 15px;
+                margin: 10px;
+                padding: 10px 5px;
+            }
+
+            .title {
+                width: 95%;
+            }
+        }
+
+        /* ------------------------------------------------- */
+
+
+        .player-icon {
+            z-index: 2;
+            width: max-content;
+            float: left;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+            position: absolute;
+            /* transition: transform 0.2s; */
+
+        }
+
+        .player-icon button {
+            outline: none;
+        }
+
+        .player-icon:active {
+            /* transform: scale(1.1); */
+            cursor: grabbing;
+        }
+
+        .player-name {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            color: rgb(255, 255, 255);
+            text-shadow: 0px 0px 10px rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 2px 7px;
+            border-radius: 10px;
+            border: 0;
+            cursor: pointer;
+        }
+
+        .player-model {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="main-header">
+        <div class="main-title">Arma tu equipo</div>
+        <button class="download-button">Descargar imagen</button>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <label>Seleccionar equipo:</label>
+
+            <select id="team-list">
+                <option selected disabled hidden>Seleccionar</option>
+                <option value="aldosivi">Aldosivi</option>
+                <option value="argentinos">Argentinos</option>
+                <option value="arsenal">Arsenal</option>
+                <option value="atltucuman">Atl Tucumán</option>
+                <option value="banfield">Banfield</option>
+                <option value="boca">Boca Juniors</option>
+                <option value="cantralcdba">Central Cdba (SdE)</option>
+                <option value="colon">Colón</option>
+                <option value="defyjusticia">Defensa y Justicia</option>
+                <option value="estudiantes">Estudiantes (LP)</option>
+                <option value="gimnasia">Gimnasia (LP)</option>
+                <option value="godoycruz">Godoy Cruz</option>
+                <option value="huracan">Huracán</option>
+                <option value="independiente">Independiente</option>
+                <option value="lanus">Lanús</option>
+                <option value="newells">Newells</option>
+                <option value="patronato">Patronato</option>
+                <option value="racing">Racing Club</option>
+                <option value="river">River Plate</option>
+                <option value="central">Rosario Central</option>
+                <option value="sanlorenzo">San Lorenzo</option>
+                <option value="talleres">Talleres (C)</option>
+                <option value="union">Unión</option>
+                <option value="velez">Vélez</option>
+            </select>
+
+            <label class="position">ARQUEROS</label>
+            <div class="players goalkeepers"></div>
+
+            <label class="position">DEFENSORES</label>
+            <div class="players defenders"></div>
+
+            <label class="position">MEDIOCAMPISTAS</label>
+            <div class="players midfielders"></div>
+
+            <label class="position">DELANTEROS</label>
+            <div class="players forwards"></div>
+
+        </div>
+
+
+        <div class="main-area">
+            <div class="screenshot-area">
+                <input class="title" placeholder="Insertar un título" type="text">
+                <div class="field"></div>
+            </div>
+            <button class="toggle-sidebar-button">Ver Jugadores</button>
+        </div>
+    </div>
+
+    <script src="./src/index.js" type="module"></script>
+</body>
+
+</html>
