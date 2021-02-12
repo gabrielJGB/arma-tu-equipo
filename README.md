@@ -4,4 +4,4 @@ Live:  https://armatuequipo.vercel.app/
 
 # Preview: 
 
-((./img/preview.jpg))
+(./img/preview.jpg)
