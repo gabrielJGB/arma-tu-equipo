@@ -1,4 +1,4 @@
-# arma-tu-equipo-2
+# arma-tu-equipo
 
 Live:  https://armatuequipo.vercel.app/
 
