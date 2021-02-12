@@ -73,7 +73,7 @@ function downloadImage() {
     const field = document.querySelector('.field')
 
     if (field.innerHTML === '') {
-        alert("No hay jugadores en el campo de juego");
+        alert("Agrega jugadores al campo de juego");
     }
     else {
         html2canvas(document.querySelector('.field')).then(
