@@ -76,7 +76,7 @@ function downloadImage() {
         alert("No hay jugadores en el campo de juego");
     }
     else {
-        html2canvas(document.querySelector('.screenshot-area')).then(
+        html2canvas(document.querySelector('.field')).then(
             function (canvas) {
                 return Canvas2Image.saveAsPNG(canvas);
             })
