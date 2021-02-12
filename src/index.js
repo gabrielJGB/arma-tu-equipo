@@ -1,6 +1,7 @@
 import { displaySelectedTeam, hideList } from './ui.js'
-import createPlayerIcon from './playerIcon.js'
+import {createPlayerIcon,getColors} from './playerIcon.js'
 import teams from './teamsInfo.js'
+import {} from './addPlayer.js'
 
 
 const teamList = document.querySelector('#team-list');
@@ -30,28 +31,13 @@ function addPlayerButtonEvent() {
 function getSelectedPlayerInfo() {
     let number = this.children[0].textContent;
     let name = this.children[1].textContent;
-    createPlayerIcon(number, name);
+    let jerseyColor = getColors()[0];
+    let numberColor = getColors()[1];
+
+    createPlayerIcon(number, name,jerseyColor,numberColor);
 
 }
 
-document.querySelector('.download-button').addEventListener('click', function () {
-    const title = document.querySelector('.title')
-    const field = document.querySelector('.field')
-
-    if (field.innerHTML === '') {
-        alert("No hay jugadores en el campo de juego");
-    }
-    else {
-        if (title.value === '') {
-            title.value = ' '
-        }
-        html2canvas(document.querySelector('.main-area')).then(
-            function (canvas) {
-                return Canvas2Image.saveAsPNG(canvas);
-            })
-        title.value = ''
-    }
-});
 
 
 

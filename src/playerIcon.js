@@ -1,16 +1,15 @@
-import { hideList,displayMessage, displaySelectedTeam } from './ui.js'
+import { hideList, displayMessage, displaySelectedTeam } from './ui.js'
 import makeDraggable from './makeDraggable.js'
 import getTeamName from './index.js'
 
 
-export default function createPlayerIcon(number, name) {
+export function createPlayerIcon(number, name,jerseyColor,numberColor) {
     const field = document.querySelector('.field');
-    let playerDiv = getPlayerElement(number, name);
+    let playerDiv = getPlayerElement(number, name, jerseyColor, numberColor);
     field.appendChild(playerDiv);
-    makePlayerDraggable();
     addDeletePlayerEvent(playerDiv);
     playerDiv.addEventListener('contextmenu', deletePlayerDesktop);
-    setColors(playerDiv);
+    makePlayerDraggable();
     hideList();
     displayMessage();
 }
@@ -24,7 +23,7 @@ function deletePlayerDesktop(e) {
 
 }
 
-function getPlayerElement(number, name) {
+function getPlayerElement(number, name, jerseyColor, numberColor) {
     let playerDiv = document.createElement('DIV');
     playerDiv.className = "player-model player-icon ";
     playerDiv.setAttribute("contextmenu", "context-menu");
@@ -40,17 +39,17 @@ function getPlayerElement(number, name) {
         </g>
         <g>
             <title>Click derecho para borrar jugador</title>
-            <rect fill="#0d1c4e" stroke-opacity="null" x="10.79408" y="1.74288" width="28.88527"
+            <rect fill="${jerseyColor}" stroke-opacity="null" x="10.79408" y="1.74288" width="28.88527"
                 height="39.63909" id="svg_26" />
-            <rect fill="#0d1c4e" stroke-opacity="null" x="22.08157" y="-9.38248" width="89.74359"
+            <rect fill="${jerseyColor}" stroke-opacity="null" x="22.08157" y="-9.38248" width="89.74359"
                 height="55.10556" id="svg_27"
                 transform="matrix(0.11267494015126664,-0.13428060550793872,0.13428060550793872,0.11267494015126664,-0.5787242092674678,17.830566470735473) " />
 
-            <rect fill="#0d1c4e" stroke-opacity="null" x="139.08044" y="130.05117" width="89.74359"
+            <rect fill="${jerseyColor}" stroke-opacity="null" x="139.08044" y="130.05117" width="89.74359"
                 height="55.10556" id="svg_3"
                 transform="rotate(-81 41.31094741821289,10.888059616088865) matrix(0.11267494015126664,-0.13428060550793872,0.13428060550793872,0.11267494015126664,-0.5787242092674678,17.830566470735473) " />
 
-            <text class="player-number" x="-24.40934" y="-24.87449" fill="#ffffff" stroke-width="0"
+            <text class="player-number" x="-24.40934" y="-24.87449" fill="${numberColor}" stroke-width="0"
                 stroke-opacity="null" id="svg_32" font-size="4" font-family="sans-serif"
                 text-anchor="middle"
                 transform="matrix(5.5037063068223,0,0,4.985333955760002,159.81749203808607,150.19696718464186) "
@@ -72,14 +71,12 @@ function makePlayerDraggable() {
 
 function addDeletePlayerEvent(player) {
     let timer = 0, touchDelay = 500;
-
     player.addEventListener('touchstart', () => {
         timer = setTimeout(() => {
             timer = null;
             deletePlayer(player);
         }, touchDelay);
     });
-
     function cancel() {
         clearTimeout(timer);
     }
@@ -91,198 +88,197 @@ function deletePlayer(player) {
     player.remove()
 }
 
-function setColors(playerDiv) {
+export function getColors() {
 
     let teamName = getTeamName()
-
+    let numberColor, jerseyColor;
     if (teamName == "aldosivi") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#ffec00';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#266517';
+
+        jerseyColor = '#ffec00';
+        numberColor = '#266517';
+        return [jerseyColor, numberColor];
     }
 
-
     else if (teamName == "argentinos") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = 'red';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ffffff';
+
+        jerseyColor = 'red';
+        numberColor = '#ffffff';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "arsenal") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#7a0210';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#5fc7ff';
+
+        jerseyColor = '#7a0210';
+        numberColor = '#5fc7ff';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "atltucuman") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#5fc7ff';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ffffff';
+
+        jerseyColor = '#5fc7ff';
+        numberColor = '#ffffff';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "banfield") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#09722c';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ffffff';
+
+        jerseyColor = '#09722c';
+        numberColor = '#ffffff';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "boca") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#103984';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ffe142';
+
+        jerseyColor = '#103984';
+        numberColor = '#ffe142';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "cantralcdba") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#000000';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ffffff';
+
+        jerseyColor = '#000000';
+        numberColor = '#ffffff';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "colon") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#000000';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ff0000';
+
+        jerseyColor = '#000000';
+        numberColor = '#ff0000';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "defyjusticia") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#025d46';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#f3f327';
+
+        jerseyColor = '#025d46';
+        numberColor = '#f3f327';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "estudiantes") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#ffffff';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ba0822';
+
+        jerseyColor = '#ffffff';
+        numberColor = '#ba0822';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "gimnasia") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#ffffff';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#2d377d';
+
+        jerseyColor = '#ffffff';
+        numberColor = '#2d377d';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "godoycruz") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#285379';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ffffff';
+
+        jerseyColor = '#285379';
+        numberColor = '#ffffff';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "huracan") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#ffffff';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#e81723';
+
+        jerseyColor = '#ffffff';
+        numberColor = '#e81723';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "independiente") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#ff000f';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ffffff';
+
+        jerseyColor = '#ff000f';
+        numberColor = '#ffffff';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "lanus") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#8d1a46';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ffffff';
+
+        jerseyColor = '#8d1a46';
+        numberColor = '#ffffff';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "newells") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#000000';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ff0000';
+
+        jerseyColor = '#000000';
+        numberColor = '#ff0000';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "patronato") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#000000';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ff0000';
+
+        jerseyColor = '#000000';
+        numberColor = '#ff0000';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "racing") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#10b4f5';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ffffff';
+
+        jerseyColor = '#10b4f5';
+        numberColor = '#ffffff';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "river") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#ffffff';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ff0000';
+
+        jerseyColor = '#ffffff';
+        numberColor = '#ff0000';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "central") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#09428b';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#f7c83a';
+
+        jerseyColor = '#09428b';
+        numberColor = '#f7c83a';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "sanlorenzo") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#102f61';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ff3a3a';
+
+        jerseyColor = '#102f61';
+        numberColor = '#ff3a3a';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "talleres") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#ffffff';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#041d47';
+
+        jerseyColor = '#ffffff';
+        numberColor = '#041d47';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "union") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#ffffff';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#ff0000';
+
+        jerseyColor = '#ffffff';
+        numberColor = '#ff0000';
+        return [jerseyColor, numberColor];
     }
 
 
     else if (teamName == "velez") {
-        for (let i = 1; i < 4; i++) {
-            playerDiv.children[0].children[1].children[i].attributes[0].value = '#ffffff';
-        }
-        playerDiv.children[0].children[1].children[4].attributes[3].value = '#100ea9';
+
+        jerseyColor = '#ffffff';
+        numberColor = '#100ea9';
+        return [jerseyColor, numberColor];
     }
 }

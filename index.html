@@ -11,6 +11,7 @@
     <title>Arma la formación de tu equipo - Primera División Fútbol Argentino</title>
 
 </head>
+
 <body>
 
     <div class="main-header">
@@ -67,13 +68,39 @@
 
         <div class="main-area">
             <div class="screenshot-area">
-                <input class="title" placeholder="Agregar un título" type="text">
                 <div class="field"></div>
             </div>
             <div class="message"></div>
         </div>
+
+
     </div>
 
+    <button class="add-player-button">+</button>
+
+    <div class="modal-window">
+        <form class="add-window">
+            <div class="add-window-title">Agregar un jugador</div>
+            <label>Nombre</label>
+            <input class="name-input" type="text">
+            <label>Número</label>
+            <input class="number-input"  maxlength="2" type="number">
+            <div class="colors">
+                <div class="color-box">
+                    <label>Camiseta</label>
+                    <input class="jersey-color"type="color">
+                </div>
+                <div class="color-box">
+                    <label>Número</label>
+                    <input class="number-color" type="color" value="#ffffff">
+                </div>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="accept-button">Aceptar</button>
+                <button class="cancel-button">Cancelar</button>
+            </div>
+        </div>
+    </div>
 
 
     <script src="./src/index.js" type="module"></script>

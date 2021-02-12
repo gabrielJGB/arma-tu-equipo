@@ -2,7 +2,9 @@ let isShowed = false;
 let flag = true;
 const sidebar = document.querySelector('.sidebar');
 const toggleSidebarButton = document.querySelector('.toggle-sidebar-button');
-toggleSidebarButton.addEventListener('click', toggleList)
+toggleSidebarButton.addEventListener('click', toggleList);
+const downloadButton = document.querySelector('.download-button')
+downloadButton.addEventListener('click',downloadImage);
 
 
 export function displaySelectedTeam(team) {
@@ -65,3 +67,18 @@ export function hideList() {
 }
 
 
+
+function downloadImage() {
+
+    const field = document.querySelector('.field')
+
+    if (field.innerHTML === '') {
+        alert("No hay jugadores en el campo de juego");
+    }
+    else {
+        html2canvas(document.querySelector('.screenshot-area')).then(
+            function (canvas) {
+                return Canvas2Image.saveAsPNG(canvas);
+            })
+    }
+}
