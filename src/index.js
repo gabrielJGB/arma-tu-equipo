@@ -28,6 +28,7 @@ function addPlayerButtonEvent() {
         player.addEventListener('click', getSelectedPlayerInfo);
     })
 }
+
 function getSelectedPlayerInfo() {
     let number = this.children[0].textContent;
     let name = this.children[1].textContent;

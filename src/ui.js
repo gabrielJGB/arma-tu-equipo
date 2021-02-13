@@ -2,9 +2,9 @@ let isShowed = false;
 let flag = true;
 const sidebar = document.querySelector('.sidebar');
 const toggleSidebarButton = document.querySelector('.toggle-sidebar-button');
+const downloadButton = document.querySelector('.download-button');
 toggleSidebarButton.addEventListener('click', toggleList);
-const downloadButton = document.querySelector('.download-button')
-downloadButton.addEventListener('click',downloadImage);
+downloadButton.addEventListener('click', downloadImage);
 
 
 export function displaySelectedTeam(team) {
@@ -38,9 +38,9 @@ export function displayMessage() {
     const message = document.querySelector('.message');
     if (flag) {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            message.textContent = 'Mantener presionado el jugador para eliminarlo';
+            message.textContent = 'Doble tap en el jugador para borrarlo';
         } else {
-            message.textContent = 'Click derecho en el jugador para eliminarlo';
+            message.textContent = 'Doble click en el jugador para borrarlo';
         }
         message.style.left = "2vh";
         setTimeout(() => {
@@ -61,6 +61,7 @@ function toggleList() {
 
     }
 }
+
 export function hideList() {
     sidebar.style.left = "-100%";
     isShowed = false;

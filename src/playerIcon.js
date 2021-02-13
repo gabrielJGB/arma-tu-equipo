@@ -2,26 +2,20 @@ import { hideList, displayMessage, displaySelectedTeam } from './ui.js'
 import makeDraggable from './makeDraggable.js'
 import getTeamName from './index.js'
 
+let taps = 0;
 
-export function createPlayerIcon(number, name,jerseyColor,numberColor) {
+export function createPlayerIcon(number, name, jerseyColor, numberColor) {
     const field = document.querySelector('.field');
     let playerDiv = getPlayerElement(number, name, jerseyColor, numberColor);
     field.appendChild(playerDiv);
-    addDeletePlayerEvent(playerDiv);
-    playerDiv.addEventListener('contextmenu', deletePlayerDesktop);
+    deletePlayerEventMobile(playerDiv);
+    playerDiv.addEventListener('dblclick', deletePlayerEventDesktop);
     makePlayerDraggable();
     hideList();
     displayMessage();
 }
 
 
-
-
-function deletePlayerDesktop(e) {
-    e.preventDefault();
-    deletePlayer(this)
-
-}
 
 function getPlayerElement(number, name, jerseyColor, numberColor) {
     let playerDiv = document.createElement('DIV');
@@ -69,19 +63,26 @@ function makePlayerDraggable() {
     })
 }
 
-function addDeletePlayerEvent(player) {
-    let timer = 0, touchDelay = 500;
-    player.addEventListener('touchstart', () => {
-        timer = setTimeout(() => {
-            timer = null;
+function deletePlayerEventDesktop() {
+    deletePlayer(this)
+}
+
+function deletePlayerEventMobile(player) {
+
+    let tapDelay = 500;
+    player.addEventListener('touchstart', detectTouch);
+
+    function detectTouch() {
+        taps++;
+        if (taps == 2) {
             deletePlayer(player);
-        }, touchDelay);
-    });
-    function cancel() {
-        clearTimeout(timer);
+            taps = 0;
+        }
+        setTimeout(() => {
+            taps = 0;
+        }, tapDelay)
+
     }
-    player.addEventListener('touchend', cancel);
-    player.addEventListener('touchmove', cancel);
 }
 
 function deletePlayer(player) {
