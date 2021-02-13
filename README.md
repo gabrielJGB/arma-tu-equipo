@@ -1,3 +1,7 @@
-# arma-tu-equipo-2
+# arma-tu-equipo
 
-Live:  https://gabrieljgb.github.io/arma-tu-equipo-2/
+Live:  https://armatuequipo.vercel.app/
+
+# Preview: 
+
+![Preview image](./img/preview.jpg)
