@@ -70,13 +70,12 @@ function deletePlayerEventDesktop() {
 
 function deletePlayerEventMobile(player) {
 
-    let tapDelay = 500;
+    let tapDelay = 300;
     player.addEventListener('touchstart', detectTap);
-    player.addEventListener('touchmove', ()=>{taps = 0});
+    // player.addEventListener('touchmove', ()=>{taps = 0});
 
     function detectTap() {
         taps++;
-
         if (taps == 2) {
             deletePlayer(player);
             taps = 0;
