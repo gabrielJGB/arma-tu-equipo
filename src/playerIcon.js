@@ -32,7 +32,7 @@ function getPlayerElement(number, name, jerseyColor, numberColor) {
             </g>
         </g>
         <g>
-            <title>Click derecho para borrar jugador</title>
+            <title>Doble click para borrar</title>
             <rect fill="${jerseyColor}" stroke-opacity="null" x="10.79408" y="1.74288" width="28.88527"
                 height="39.63909" id="svg_26" />
             <rect fill="${jerseyColor}" stroke-opacity="null" x="22.08157" y="-9.38248" width="89.74359"
@@ -63,6 +63,7 @@ function makePlayerDraggable() {
     })
 }
 
+
 function deletePlayerEventDesktop() {
     deletePlayer(this)
 }
@@ -70,10 +71,12 @@ function deletePlayerEventDesktop() {
 function deletePlayerEventMobile(player) {
 
     let tapDelay = 500;
-    player.addEventListener('touchstart', detectTouch);
+    player.addEventListener('touchstart', detectTap);
+    player.addEventListener('touchmove', ()=>{taps = 0});
 
-    function detectTouch() {
+    function detectTap() {
         taps++;
+
         if (taps == 2) {
             deletePlayer(player);
             taps = 0;
@@ -86,7 +89,12 @@ function deletePlayerEventMobile(player) {
 }
 
 function deletePlayer(player) {
-    player.remove()
+    player.style.transition = "all 0.5s";
+    player.style.opacity = "0";
+
+    setTimeout(()=>{
+          player.remove()
+    },400)
 }
 
 export function getColors() {

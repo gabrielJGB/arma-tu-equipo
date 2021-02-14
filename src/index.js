@@ -6,6 +6,7 @@ import {} from './addPlayer.js'
 
 const teamList = document.querySelector('#team-list');
 teamList.addEventListener('change', getSelectedTeam);
+
 let team = '';
 
 function getSelectedTeam() {

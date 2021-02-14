@@ -1,11 +1,14 @@
 let isShowed = false;
 let flag = true;
+let initialX = null;
 const sidebar = document.querySelector('.sidebar');
 const toggleSidebarButton = document.querySelector('.toggle-sidebar-button');
 const downloadButton = document.querySelector('.download-button');
+const container = document.querySelector("body");
 toggleSidebarButton.addEventListener('click', toggleList);
 downloadButton.addEventListener('click', downloadImage);
-
+container.addEventListener("touchstart", swipeStart);
+container.addEventListener("touchmove", swipeMenu);
 
 export function displaySelectedTeam(team) {
     const goalkeepersList = document.querySelector('.goalkeepers');
@@ -56,9 +59,7 @@ function toggleList() {
         hideList();
     }
     else {
-        sidebar.style.left = "0%";
-        isShowed = true;
-
+        showList();
     }
 }
 
@@ -67,10 +68,28 @@ export function hideList() {
     isShowed = false;
 }
 
+function showList(){
+    sidebar.style.left = "0%";
+    isShowed = true;
+}
 
+function swipeStart(e) {
+    initialX = e.touches[0].clientX;
+}
+
+function swipeMenu(e) {
+    let currentX = e.touches[0].clientX;
+    let toggleMenuWidth = (window.innerWidth)/2;
+
+    if (currentX > initialX + toggleMenuWidth ) {
+        showList()
+    } 
+    else if(currentX < initialX - toggleMenuWidth){
+        hideList();
+    }    
+}
 
 function downloadImage() {
-
     const field = document.querySelector('.field')
 
     if (field.innerHTML === '') {

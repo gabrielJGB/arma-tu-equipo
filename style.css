@@ -199,9 +199,7 @@ body{
     cursor: grab;
     position: absolute;
     transform: scale(0.9);
-    right:20%;
     
-
 
 }
 
@@ -358,7 +356,7 @@ body{
         height: 85%;
     }
     .main-area{
-        height: 100vh;
+        height: 90vh;
     }
 
     .sidebar {
@@ -401,7 +399,7 @@ body{
     }
 
     .main-header {
-        height: 11vh
+        height: 10vh
     }
 
     .download-button {
@@ -417,8 +415,8 @@ body{
 
     .player-icon {
         transform: scale(0.71);
-        top:20%;
-        right:0px;
+        top:10%;
+        /* right:0px; */
 
     }
 
