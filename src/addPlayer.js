@@ -9,7 +9,7 @@ addButton.addEventListener('click', displayFormWindow);
 cancelButton.addEventListener('click',closeFormWindow);
 
 function displayFormWindow(){
-    acceptButton.addEventListener('click',getPlayerInfo)
+    acceptButton.addEventListener('click',getPlayerInfo);
     modalWindow.style.display = "flex";
 }
 
