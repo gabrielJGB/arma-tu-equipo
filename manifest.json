@@ -2,8 +2,8 @@
     "theme_color": "#1cb200",
     "background_color": "#4d4d4d",
     "display": "standalone",
-    "scope": "/",
-    "start_url": "/index.html",
+    "scope": "./",
+    "start_url": "index.html",
     "name": "Arma la formacion de tu equipo",
     "short_name": "Arma tu formacion",
     "icons": [
