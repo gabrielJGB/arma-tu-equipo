@@ -51,7 +51,7 @@ function getPlayerElement(number, name, jerseyColor, numberColor) {
         </g>
     </svg>
 
-    <button type="button" class="player-name">${name}</button>
+    <div class="player-name">${name}</div>
 `
     return playerDiv;
 }
