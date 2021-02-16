@@ -3,10 +3,6 @@ import {createPlayerIcon,getColors} from './playerIcon.js'
 import teams from './teamsInfo.js'
 import {} from './addPlayer.js'
 
-if ("serviceWorker" in navigator) {
-    // register service worker
-    navigator.serviceWorker.register("service-worker.js");
-  }
 
 const teamList = document.querySelector('#team-list');
 teamList.addEventListener('change', getSelectedTeam);
