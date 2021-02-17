@@ -3,12 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="./src/html2canvas.min.js"></script>
-    <script src="./src/canvas2image.js"></script>
+    <script src="src/canvas2image.js"></script>
     <link rel="shortcut icon" href="./img/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <title>Armá la formación de tu equipo - Primera División Fútbol Argentino</title>
 
 </head>
@@ -68,13 +69,25 @@
 
 
         <div class="main-area">
-                <div class="field"></div>
-      
+            <div class="field"></div>
+
             <div class="message"></div>
         </div>
     </div>
 
     <button class="add-player-button">+</button>
+    
+    <div class="modal-download">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            style="margin: auto; background: rgba(38, 38, 38, 0); display: block;" width="200px" height="200px"
+            viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <circle cx="50" cy="50" fill="none" stroke="#ffffff" stroke-width="10" r="35"
+                stroke-dasharray="164.93361431346415 56.97787143782138">
+                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s"
+                    values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+            </circle>
+        </svg>
+    </div>
 
     <div class="modal-window">
         <form class="add-window">
@@ -82,11 +95,11 @@
             <label>Nombre</label>
             <input class="name-input" type="text">
             <label>Número</label>
-            <input class="number-input"  maxlength="2" type="number">
+            <input class="number-input" maxlength="2" type="number">
             <div class="colors">
                 <div class="color-box">
                     <label>Camiseta</label>
-                    <input class="jersey-color"type="color">
+                    <input class="jersey-color" type="color">
                 </div>
                 <div class="color-box">
                     <label>Número</label>
@@ -97,7 +110,7 @@
                 <button type="submit" class="accept-button">Aceptar</button>
                 <button class="cancel-button">Cancelar</button>
             </div>
-        </div>
+    </div>
     </div>
 
     <script src="./src/index.js" type="module"></script>

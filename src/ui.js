@@ -90,14 +90,19 @@ function swipeMenu(e) {
 }
 
 function downloadImage() {
-    const field = document.querySelector('.field')
-
+    const field = document.querySelector('.field');
+    const modalDownload = document.querySelector('.modal-download');
+    modalDownload.style.transition = "all 0.5s"
+    modalDownload.style.display = "flex";
+    
     if (field.innerHTML === '') {
         alert("Agrega jugadores al campo de juego");
+        modalDownload.style.display = "none";
     }
     else {
         html2canvas(document.querySelector('.field')).then(
             function (canvas) {
+                modalDownload.style.display = "none";
                 return Canvas2Image.saveAsPNG(canvas);
             })
     }
