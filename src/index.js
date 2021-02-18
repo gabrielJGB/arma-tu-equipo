@@ -40,8 +40,10 @@ function getSelectedPlayerInfo() {
     let name = this.children[1].textContent;
     let jerseyColor = getColors()[0];
     let numberColor = getColors()[1];
+    let top = 10;
+    let left = 10;
 
-    createPlayerIcon(number, name,jerseyColor,numberColor);
+    createPlayerIcon(number, name,jerseyColor,numberColor,top,left);
 
 }
 

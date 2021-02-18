@@ -9,7 +9,7 @@ checkLocalStorage();
 function saveFormation() {
     const players = document.querySelectorAll('.player-icon');
     let playersToSave = [];
-    let title = prompt("Ingrese un título:");
+    let title = prompt("Ingrese un título para la formación:");
 
     players.forEach((player) => {
         let topPosition = player.style.top;
@@ -37,32 +37,41 @@ function checkLocalStorage() {
         let title = window.localStorage.key(i);
         if (title != "count") {
             let formation = JSON.parse(window.localStorage.getItem(title));
-            // precessFormation(formation);
+            precessFormation(formation);
         }
     }
 }
 
 
 function precessFormation(formation) {
-console.log(formation.length)
+    // console.log(formation[0])
+    // console.log(formation[1])
+    let topPosition;
+    let leftPosition;
+    console.log(formation.length)
     formation.forEach((i) => {
-        let number = formation[i].number;
-        let name = formation[i].name;
-        let jerseyColor = formation[i].jerseyColor;
-        let numberColor = formation[i].numberColor;
-        let topPosition = formation[i].topPosition;
-        let leftPosition = formation[i].leftPosition;
+        
+        let number = i.number;
+        let name = i.name;
+        let jerseyColor = i.jerseyColor;
+        let numberColor = i.numberColor;
+        let dataId = i.dataId;
+        topPosition = i.topPosition;
+        leftPosition = i.leftPosition;
         createPlayerIcon(number, name, jerseyColor, numberColor)
-
-        let players = document.querySelectorAll('.player-icon');
-        players.forEach((i) => {
-            // if (i.attributes[2].value == dataId) {
-            // console.log(i.attributes[2].value,dataId)
-            i.style.top = topPosition;
-            i.style.left = leftPosition;
-            // }
-        })
+        position(dataId);
     })
 }
+function position(dataId) {
+    let players = document.querySelectorAll('.player-icon');
+    players.forEach((i) => {
+        //dataID me parece que no va a funcionar xq createicon genera n id nuevo != al guardado
+        // if (i.attributes[2].value === dataId) {console.log('ok')}
+        // console.log(i.attributes[2].value,dataId)
+        // console.log(topPosition +", "+ leftPosition)
+        // i.style.top = topPosition;
+        // i.style.left = leftPosition;
+        // }
+    })
 
-
+}

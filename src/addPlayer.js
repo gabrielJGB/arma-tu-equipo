@@ -28,7 +28,7 @@ function getPlayerInfo(e){
         alert("Ingrese un nombre y un número");
     }
     else{
-    createPlayerIcon(number,name,jerseyColor,numberColor);
+    createPlayerIcon(number,name,jerseyColor,numberColor,top,left);
     modalWindow.style.display = "none";
     }
 }
