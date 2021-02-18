@@ -1,4 +1,4 @@
-let isShowed = false;
+let isVisible = false;
 let flag = true;
 let initialX = null;
 const sidebar = document.querySelector('.sidebar');
@@ -8,7 +8,6 @@ const container = document.querySelector("body");
 toggleSidebarButton.addEventListener('click', toggleList);
 downloadButton.addEventListener('click', downloadImage);
 container.addEventListener("touchstart", swipeStart);
-container.addEventListener("touchmove", swipeMenu);
 
 export function displaySelectedTeam(team) {
     const goalkeepersList = document.querySelector('.goalkeepers');
@@ -23,16 +22,20 @@ export function displaySelectedTeam(team) {
     team.players.forEach((i) => {
         if (i.position === "goalkeeper") {
             goalkeepersList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
+            
         }
         else if (i.position === "defender") {
             defendersList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
+            
         }
         else if (i.position === "midfielder") {
             midfieldersList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
+            
         }
         else if (i.position === "forward") {
             forwardsList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
         }
+
     });
 
 
@@ -53,40 +56,60 @@ export function displayMessage() {
     }
 }
 
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    const arrow = document.querySelector('.arrow');
+    arrow.style.left = "-40px";
+    document.addEventListener('touchstart', () => {
+        arrow.style.left = "-70vh";
+    })
+
+}
 
 function toggleList() {
-    if (isShowed) {
-        hideList();
+    if (isVisible) {
+        hideList("-100%");
     }
     else {
-        showList();
+        showList("0%");
     }
 }
 
-export function hideList() {
-    sidebar.style.left = "-100%";
-    isShowed = false;
+export function hideList(value) {
+    sidebar.style.left = value;
+    isVisible = false;
 }
 
-function showList(){
-    sidebar.style.left = "0%";
-    isShowed = true;
+function showList(value) {
+    sidebar.style.left = value;
+    isVisible = true;
 }
 
 function swipeStart(e) {
-    initialX = e.touches[0].clientX;
+    
+    if (e.target.className === "field" || e.target.className === "sidebar" || e.target.className === "player" || e.target.className === "arrow" ) {
+        initialX = e.touches[0].clientX;
+        container.addEventListener("touchmove", swipeMenu);
+    }
 }
-
 function swipeMenu(e) {
     let currentX = e.touches[0].clientX;
-    let toggleMenuWidth = (window.innerWidth)/2;
 
-    if (currentX > initialX + toggleMenuWidth ) {
-        showList()
-    } 
-    else if(currentX < initialX - toggleMenuWidth){
-        hideList();
-    }    
+    if (currentX > initialX + window.innerWidth/3) {        
+        showList("0%");
+    }
+    else if (currentX < initialX  - window.innerWidth/3) {
+        hideList("-100%");
+    }
+}
+
+export function togglePlayerButton(name,number) {
+    const names = document.querySelectorAll('.name');
+    
+    names.forEach((i) => {
+        if (i.textContent === name && i.previousElementSibling.textContent === number) {
+            i.parentElement.disabled? i.parentElement.disabled = false: i.parentElement.disabled = true;
+        }
+    });
 }
 
 function downloadImage() {
@@ -94,10 +117,10 @@ function downloadImage() {
     const modalDownload = document.querySelector('.modal-download');
     modalDownload.style.transition = "all 0.5s"
     modalDownload.style.display = "flex";
-    
+
     if (field.innerHTML === '') {
-        alert("Agrega jugadores al campo de juego");
         modalDownload.style.display = "none";
+        alert("Agrega jugadores al campo de juego");
     }
     else {
         html2canvas(document.querySelector('.field')).then(
@@ -107,3 +130,4 @@ function downloadImage() {
             })
     }
 }
+

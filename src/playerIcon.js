@@ -1,4 +1,4 @@
-import { hideList, displayMessage, displaySelectedTeam } from './ui.js'
+import { hideList, displayMessage, displaySelectedTeam, togglePlayerButton} from './ui.js'
 import makeDraggable from './makeDraggable.js'
 import getTeamName from './index.js'
 
@@ -11,7 +11,8 @@ export function createPlayerIcon(number, name, jerseyColor, numberColor) {
     deletePlayerEventMobile(playerDiv);
     playerDiv.addEventListener('dblclick', deletePlayerEventDesktop);
     makePlayerDraggable();
-    hideList();
+    hideList("-100%");
+    togglePlayerButton(name,number);
     displayMessage();
 }
 
@@ -69,10 +70,8 @@ function deletePlayerEventDesktop() {
 }
 
 function deletePlayerEventMobile(player) {
-
     let tapDelay = 300;
     player.addEventListener('touchstart', detectTap);
-    // player.addEventListener('touchmove', ()=>{taps = 0});
 
     function detectTap() {
         taps++;
@@ -88,12 +87,16 @@ function deletePlayerEventMobile(player) {
 }
 
 function deletePlayer(player) {
+    let name = player.children[1].textContent;
+    let number = player.children[0].children[1].children[4].textContent;
+    
+    togglePlayerButton(name,number);
     player.style.transition = "all 0.5s";
     player.style.opacity = "0";
 
-    setTimeout(()=>{
-          player.remove()
-    },400)
+    setTimeout(() => {
+        player.remove()
+    }, 400);
 }
 
 export function getColors() {
