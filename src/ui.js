@@ -85,7 +85,6 @@ function showList(value) {
 }
 
 function swipeStart(e) {
-    console.log(e.target.className)
     if (e.target.className === "field" || e.target.className === "sidebar" || e.target.className === "player" || e.target.className === "arrow" ) {
         initialX = e.touches[0].clientX;
         container.addEventListener("touchmove", swipeMenu);

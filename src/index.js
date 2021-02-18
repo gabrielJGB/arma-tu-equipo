@@ -2,6 +2,7 @@ import { displaySelectedTeam, hideList } from './ui.js'
 import {createPlayerIcon,getColors} from './playerIcon.js'
 import teams from './teamsInfo.js'
 import {} from './addPlayer.js'
+import {} from './saveTeam.js'
 
 if ("serviceWorker" in navigator) {
     // register service worker

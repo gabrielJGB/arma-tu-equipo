@@ -11,7 +11,8 @@ export function createPlayerIcon(number, name, jerseyColor, numberColor) {
     deletePlayerEventMobile(playerDiv);
     playerDiv.addEventListener('dblclick', deletePlayerEventDesktop);
     makePlayerDraggable();
-    // hideList("-100%");
+    hideList("-100%");
+    // console.log(playerDiv.attributes[2].value)
     togglePlayerButton(name,number);
     displayMessage();
 }
@@ -22,6 +23,7 @@ function getPlayerElement(number, name, jerseyColor, numberColor) {
     let playerDiv = document.createElement('DIV');
     playerDiv.className = "player-model player-icon ";
     playerDiv.setAttribute("contextmenu", "context-menu");
+    playerDiv.setAttribute("data-id", Date.now());
     playerDiv.innerHTML = `
     <svg width="52.00000000000001" height="44" xmlns="http://www.w3.org/2000/svg">
         <g>
