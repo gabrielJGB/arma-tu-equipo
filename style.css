@@ -55,7 +55,7 @@ body{
     padding: 10px;
     height:40px;
     font-size: 17px;
-    font-family: 'Rubik';
+    font-family:  'Rubik';
     text-decoration: none;
     cursor: pointer;
     border: 0;
@@ -211,7 +211,7 @@ body{
 
 .player-name {
     font-family: 'Rubik';
-    font-size: 23px;
+    font-size: 22px;
     color: rgb(255, 255, 255);
     text-shadow: 0px 0px 5px rgb(0, 0, 0);
     text-shadow: -2px -1px 2px #000, 2px -1px 2px #000, -2px 1px 2px #000, 2px 1px 2px #000;
@@ -393,6 +393,9 @@ body{
         background-color:transparent;
     }
 
+    .player:hover{
+        background-color:transparent;
+    }
 
     .field {
         background-size: 125%;
@@ -441,7 +444,7 @@ body{
         top:75%;
     }
     .player-name{
-        font-size: 25px;
+        font-size: 22px;
     }
 
 }
