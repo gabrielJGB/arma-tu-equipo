@@ -5,9 +5,10 @@ import getTeamName from './index.js'
 let taps = 0;
 
 export function createPlayerIcon(number, name, jerseyColor, numberColor,top,left) {
-    console.log(top,left)
     const field = document.querySelector('.field');
     let playerDiv = getPlayerElement(number, name, jerseyColor, numberColor);
+    playerDiv.style.top = top;
+    playerDiv.style.left = left;
     field.appendChild(playerDiv);
     deletePlayerEventMobile(playerDiv);
     playerDiv.addEventListener('dblclick', deletePlayerEventDesktop);

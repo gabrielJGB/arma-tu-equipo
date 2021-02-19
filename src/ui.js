@@ -53,6 +53,9 @@ export function displayMessage() {
             message.style.left = "-140vh";
         }, 5000)
         flag = false;
+        message.addEventListener('click',()=>{
+            message.style.left = "-140vh";
+        })
     }
 }
 
