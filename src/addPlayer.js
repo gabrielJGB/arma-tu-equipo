@@ -11,6 +11,12 @@ cancelButton.addEventListener('click',closeFormWindow);
 function displayFormWindow(){
     acceptButton.addEventListener('click',getPlayerInfo);
     modalWindow.style.display = "flex";
+    modalWindow.addEventListener('click',(e)=>{
+        e.preventDefault();
+        if (e.target.className === 'modal-window') {
+            modalWindow.style.display = "none";
+        }
+    })
 }
 
 function closeFormWindow(e){
@@ -28,7 +34,7 @@ function getPlayerInfo(e){
         alert("Ingrese un nombre y un número");
     }
     else{
-    createPlayerIcon(number,name,jerseyColor,numberColor,top,left);
+    createPlayerIcon(number,name,jerseyColor,numberColor,top,"");
     modalWindow.style.display = "none";
     }
 }

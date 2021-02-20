@@ -54,6 +54,7 @@ function showFormationWindow() {
     formations.forEach((formation) => {
         formation.addEventListener('click', () => {
             let key = formation.textContent;
+            field.innerHTML = '';
             displayFormation(key);
         })
     })
@@ -134,6 +135,7 @@ function saveFormation() {
             window.localStorage.setItem(title, JSON.stringify(playersToSave));
             count += 1;
             window.localStorage.setItem("count", count);
+            alert("Formación guardada");
         }
     }
 }

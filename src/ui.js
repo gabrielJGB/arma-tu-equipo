@@ -88,16 +88,17 @@ function showList(value) {
 }
 
 function swipeStart(e) {
-    if (e.target.className === "field" || e.target.className === "sidebar" || e.target.className === "player" || e.target.className === "arrow" ) {
-        initialX = e.touches[0].clientX;
+    if (e.target.className === "field" || e.target.className === "sidebar" || e.target.className === "player" || e.target.className === "arrow" || e.target.className === "position" ) {
+        initialX = e.touches[0].clientX;   
         container.addEventListener("touchmove", swipeMenu);
     }
+    
 }
 function swipeMenu(e) {
     let currentX = e.touches[0].clientX;
-
-    if (currentX > initialX + window.innerWidth/3) {        
+    if (currentX > initialX + window.innerWidth/3) {     
         showList("0%");
+        container.removeEventListener("touchmove", swipeMenu)
     }
     else if (currentX < initialX  - window.innerWidth/3) {
         hideList("-100%");
