@@ -11,65 +11,84 @@
     <link rel="manifest" href="./manifest.json">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
-    <title>Armá la formación de tu equipo - Primera División Fútbol Argentino</title>
+    <title>Armá la formación de tu equipo</title>
 
 </head>
 
 <body>
 
     <div class="main-header">
-        <div class="main-title">Arma tu equipo</div>
+        <h1 class="main-title">Arma la formación de tu equipo</h1>
         <button class="toggle-sidebar-button">&#9776;</button>
-        <button type="button" class="download-button">Descargar imagen</button>
-    </div>
-    <div class="container">
-        <div class="sidebar">
-            <label>Seleccionar equipo:</label>
 
-            <select id="team-list">
-                <option class="option" selected disabled hidden>Seleccionar</option>
-                <option value="aldosivi">Aldosivi</option>
-                <option value="argentinos">Argentinos</option>
-                <option value="arsenal">Arsenal</option>
-                <option value="atltucuman">Atl Tucumán</option>
-                <option value="banfield">Banfield</option>
-                <option value="boca">Boca Juniors</option>
-                <option value="cantralcdba">Central Cdba (SdE)</option>
-                <option value="colon">Colón</option>
-                <option value="defyjusticia">Defensa y Justicia</option>
-                <option value="estudiantes">Estudiantes (LP)</option>
-                <option value="gimnasia">Gimnasia (LP)</option>
-                <option value="godoycruz">Godoy Cruz</option>
-                <option value="huracan">Huracán</option>
-                <option value="independiente">Independiente</option>
-                <option value="lanus">Lanús</option>
-                <option value="newells">Newells</option>
-                <option value="patronato">Patronato</option>
-                <option value="platense">Platense</option>
-                <option value="racing">Racing Club</option>
-                <option value="river">River Plate</option>
-                <option value="central">Rosario Central</option>
-                <option value="sanlorenzo">San Lorenzo</option>
-                <option value="sarmiento">Sarmiento (J)</option>
-                <option value="talleres">Talleres (C)</option>
-                <option value="union">Unión</option>
-                <option value="velez">Vélez</option>
-            </select>
-
-            <label class="position">ARQUEROS</label>
-            <div class="players goalkeepers"></div>
-
-            <label class="position">DEFENSORES</label>
-            <div class="players defenders"></div>
-
-            <label class="position">MEDIOCAMPISTAS</label>
-            <div class="players midfielders"></div>
-
-            <label class="position">DELANTEROS</label>
-            <div class="players forwards"></div>
-
+        <button type="button" class="download-button-mobile">Descargar imagen</button>
+        <div class="menu-bar">
+            <button class="save-button">Guardar</button>
+            <button class="load-button">Cargar</button>
+            <button class="add-player-button">Agregar</button>
         </div>
 
+    </div>
+    <div class="container">
+        <div class="sidebar-container">
+            <button type="button" class="download-button">Descargar imagen</button>
+            <div class="sidebar">
+                
+                <label>Seleccionar equipo:</label>
+
+                <select id="team-list">
+                    <option class="option" selected disabled hidden>Seleccionar</option>
+                    <option value="aldosivi">Aldosivi</option>
+                    <option value="argentinos">Argentinos</option>
+                    <option value="arsenal">Arsenal</option>
+                    <option value="atltucuman">Atl Tucumán</option>
+                    <option value="banfield">Banfield</option>
+                    <option value="boca">Boca Juniors</option>
+                    <option value="cantralcdba">Central Cdba (SdE)</option>
+                    <option value="colon">Colón</option>
+                    <option value="defyjusticia">Defensa y Justicia</option>
+                    <option value="estudiantes">Estudiantes (LP)</option>
+                    <option value="gimnasia">Gimnasia (LP)</option>
+                    <option value="godoycruz">Godoy Cruz</option>
+                    <option value="huracan">Huracán</option>
+                    <option value="independiente">Independiente</option>
+                    <option value="lanus">Lanús</option>
+                    <option value="newells">Newells</option>
+                    <option value="patronato">Patronato</option>
+                    <option value="platense">Platense</option>
+                    <option value="racing">Racing Club</option>
+                    <option value="river">River Plate</option>
+                    <option value="central">Rosario Central</option>
+                    <option value="sanlorenzo">San Lorenzo</option>
+                    <option value="sarmiento">Sarmiento (J)</option>
+                    <option value="talleres">Talleres (C)</option>
+                    <option value="union">Unión</option>
+                    <option value="velez">Vélez</option>
+                </select>
+
+                <div class="color-box2">
+                    <label>Camiseta:</label>
+                    <input class="jersey-color-team" type="color">
+                </div>
+                <div class="color-box2">
+                    <label>Número:</label>
+                    <input class="number-color-team" type="color" value="#ffffff">
+                </div>
+
+                <label class="position">ARQUEROS</label>
+                <div class="players goalkeepers"></div>
+
+                <label class="position">DEFENSORES</label>
+                <div class="players defenders"></div>
+
+                <label class="position">MEDIOCAMPISTAS</label>
+                <div class="players midfielders"></div>
+
+                <label class="position">DELANTEROS</label>
+                <div class="players forwards"></div>
+
+            </div>
+        </div>
 
         <div class="main-area">
             <div class="field"></div>
@@ -77,12 +96,6 @@
             <div class="message"></div>
             <img class="arrow" src="./img/right-arrow.png" alt="">
         </div>
-    </div>
-
-    <div class="menu-bar">
-        <button class="save-button">Guardar</button>
-        <button class="load-button">Cargar</button>
-        <button class="add-player-button">Agregar</button>
     </div>
 
     <div class="modal-load">
@@ -108,7 +121,7 @@
 
     <div class="modal-window">
         <form class="add-window">
-            <div class="add-window-title">Agregar un jugador personalizado</div>
+            <div class="add-window-title">Agregar un jugador</div>
             <label>Nombre</label>
             <input class="name-input" type="text">
             <label>Número</label>

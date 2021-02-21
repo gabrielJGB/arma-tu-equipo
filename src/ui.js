@@ -4,9 +4,11 @@ let initialX = null;
 const sidebar = document.querySelector('.sidebar');
 const toggleSidebarButton = document.querySelector('.toggle-sidebar-button');
 const downloadButton = document.querySelector('.download-button');
+const downloadButtonMobile = document.querySelector('.download-button-mobile');
 const container = document.querySelector("body");
 toggleSidebarButton.addEventListener('click', toggleList);
 downloadButton.addEventListener('click', downloadImage);
+downloadButtonMobile.addEventListener('click', downloadImage);
 container.addEventListener("touchstart", swipeStart);
 
 export function displaySelectedTeam(team) {
@@ -22,15 +24,15 @@ export function displaySelectedTeam(team) {
     team.players.forEach((i) => {
         if (i.position === "goalkeeper") {
             goalkeepersList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
-            
+
         }
         else if (i.position === "defender") {
             defendersList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
-            
+
         }
         else if (i.position === "midfielder") {
             midfieldersList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
-            
+
         }
         else if (i.position === "forward") {
             forwardsList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
@@ -53,7 +55,7 @@ export function displayMessage() {
             message.style.left = "-140vh";
         }, 5000)
         flag = false;
-        message.addEventListener('click',()=>{
+        message.addEventListener('click', () => {
             message.style.left = "-140vh";
         })
     }
@@ -88,29 +90,29 @@ function showList(value) {
 }
 
 function swipeStart(e) {
-    if (e.target.className === "field" || e.target.className === "sidebar" || e.target.className === "player" || e.target.className === "arrow" || e.target.className === "position" ) {
-        initialX = e.touches[0].clientX;   
+    if (e.target.className === "field" || e.target.className === "sidebar" || e.target.className === "player" || e.target.className === "arrow" || e.target.className === "position") {
+        initialX = e.touches[0].clientX;
         container.addEventListener("touchmove", swipeMenu);
     }
-    
+
 }
 function swipeMenu(e) {
     let currentX = e.touches[0].clientX;
-    if (currentX > initialX + window.innerWidth/3) {     
+    if (currentX > initialX + window.innerWidth / 3) {
         showList("0%");
-        container.removeEventListener("touchmove", swipeMenu)
+        container.removeEventListener("touchmove", swipeMenu);
     }
-    else if (currentX < initialX  - window.innerWidth/3) {
+    else if (currentX < initialX - window.innerWidth / 3) {
         hideList("-100%");
     }
 }
 
-export function togglePlayerButton(name,number) {
+export function togglePlayerButton(name, number) {
     const names = document.querySelectorAll('.name');
-    
+
     names.forEach((i) => {
         if (i.textContent === name && i.previousElementSibling.textContent === number) {
-            i.parentElement.disabled? i.parentElement.disabled = false: i.parentElement.disabled = true;
+            i.parentElement.disabled ? i.parentElement.disabled = false : i.parentElement.disabled = true;
         }
     });
 }
@@ -134,3 +136,19 @@ function downloadImage() {
     }
 }
 
+export function setTeamColors() {
+    const players = document.querySelectorAll('.player-icon');
+
+    if (this.className == 'jersey-color-team') {
+        players.forEach((player) => {
+            player.children[0].children[1].children[1].attributes[0].value = this.value;
+            player.children[0].children[1].children[2].attributes[0].value = this.value;
+            player.children[0].children[1].children[3].attributes[0].value = this.value;
+        })
+    }
+    else if (this.className == 'number-color-team') {
+        players.forEach((player) => {
+            player.children[0].children[1].children[4].attributes[3].value = this.value;
+        })
+    }
+}

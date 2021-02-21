@@ -7,6 +7,9 @@ body{
     background-color: #181818;
     font-family: 'Rubik', sans-serif;
 }
+h1{
+    font-weight: 500;
+}
 
 .container {
     display: flex;
@@ -23,7 +26,7 @@ body{
     text-align: center;
     height: 90vh;
     overflow: auto;
-    width: 300px;
+    /* width: 200px; */
     transition: all 0.5s;
     /* background-color: #2c2c2c; */
     background-color: #202020;
@@ -40,10 +43,18 @@ body{
 
 .sidebar>select {
     padding: 5px;
-    margin: 5px 15px;
     text-align: center;
     border-radius: 11px;
     font-size: 17px;
+    margin:0 25px
+}
+
+.sidebar-container{
+    z-index: 3;
+    background-color: #202020;
+    display:flex;
+    flex-direction: column;
+    width:300px;
 }
 
 body::-webkit-scrollbar {
@@ -202,22 +213,26 @@ body::-webkit-scrollbar {
     height: 10vh;
     /* background-color: rgb(53, 50, 50); */
     background-color: #202020;
-    box-shadow: 0 2px 5px #00000078;
+    /* box-shadow: 0 2px 5px #00000078; */
     color: white;
 
 }
 
-.download-button {
+.download-button, .download-button-mobile {
     border: 0;
     border-radius: 4px;
     padding: 10px;
-    margin: 0 30px;
-    font-size: 17px;
+    margin: 10px 20px;
+    font-size: 18px;
+    height:9vh;
     background-color: rgb(86, 217, 221);
     border-bottom: solid 3px rgb(71, 154, 158);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     cursor: pointer;
     outline: none;
+}
+.download-button-mobile{
+    display:none;
 }
 
 .download-button:hover{
@@ -313,14 +328,7 @@ body::-webkit-scrollbar {
 }
 
 .menu-bar{
-    z-index: 2;
-    position:fixed;
-    right:0;
-    bottom:50vh;
-    display:flex;
-    flex-direction: column;
-    border-top: solid 2px rgb(97, 97, 97);
-    border-left: solid 2px rgb(97, 97, 97);
+    margin-right: 10px;
 
 }
 
@@ -333,10 +341,12 @@ body::-webkit-scrollbar {
     border-bottom: solid 2px rgb(97, 97, 97);
     cursor:pointer;
     outline: none;
-    font-size: 18px;
+    font-size: 16px;
 }
 .menu-bar button:hover{
-    background-color: rgba(14, 14, 14, 0.76);
+    /* background-color: rgba(14, 14, 14, 0.76); */
+    transition:all 0.3s;
+    border-bottom: solid 2px rgb(218, 218, 218);
     color:white
 }
 .modal-window{
@@ -439,6 +449,16 @@ body::-webkit-scrollbar {
 
 }
 
+.color-box2{
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width:70%;
+    margin:10px auto;
+}
+
+
 .formations-box{
     overflow: auto;
     padding: 30px;
@@ -506,10 +526,15 @@ body::-webkit-scrollbar {
         left: -100%;
         display: flex;
         width: 100%;
-        height: 90vh;
+        height: 83vh;
         margin-top: 10vh;
         background-color:rgb(25,25,25,0.92);
     }
+
+    .sidebar-container{
+        width:0;
+    }
+
     .players, .player{
         background-color:transparent;
     }
@@ -537,7 +562,7 @@ body::-webkit-scrollbar {
         border-radius: 5px;
         outline: none;
         cursor: pointer;
-        margin: 0 10px
+        margin: 0 10px;
     }
 
     .main-title {
@@ -551,11 +576,14 @@ body::-webkit-scrollbar {
     }
 
     .download-button {
-        font-size: 15px;
-        margin: 10px;
-        padding: 10px 5px;
+        display: none;
+        
     }
-
+    .download-button-mobile{
+        display:block;
+        height: auto;
+        margin-right:10px;
+    }
     .title {
         margin-top: 20px;
         width: 95%;
@@ -569,6 +597,15 @@ body::-webkit-scrollbar {
         font-size: 22px;
     }
     .menu-bar{
+        z-index: 2;
+        position:fixed;
+        /* right:0; */
+        /* bottom:50vh; */
+        display:flex;
+        /* flex-direction: column; */
+        border-top: solid 2px rgb(97, 97, 97);
+        /* border-left: solid 2px rgb(97, 97, 97); */
+        height:7vh;
         flex-direction: row;
         bottom:0;
         width: 100%;
@@ -579,10 +616,14 @@ body::-webkit-scrollbar {
         width: 100%;
         border:0;
         outline: none;
+        font-size: 20px;
     }
     .load-formation{
         outline: none;
         
+    }
+    .color-box2{
+        width:40%;
     }
 
 }

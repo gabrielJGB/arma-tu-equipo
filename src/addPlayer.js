@@ -4,12 +4,17 @@ const addButton = document.querySelector('.add-player-button');
 const acceptButton = document.querySelector('.accept-button');
 const cancelButton = document.querySelector('.cancel-button');
 const modalWindow = document.querySelector('.modal-window');
+let nameInput = document.querySelector('.name-input');
+let numberInput = document.querySelector('.number-input');
 
 addButton.addEventListener('click', displayFormWindow);
 cancelButton.addEventListener('click',closeFormWindow);
 
 function displayFormWindow(){
     acceptButton.addEventListener('click',getPlayerInfo);
+    nameInput.value = "";
+    numberInput.value = "";
+    nameInput.autofocus = true;
     modalWindow.style.display = "flex";
     modalWindow.addEventListener('click',(e)=>{
 
@@ -26,8 +31,8 @@ function closeFormWindow(e){
 
 function getPlayerInfo(e){
     e.preventDefault();
-    let name = document.querySelector('.name-input').value;
-    let number = document.querySelector('.number-input').value;
+    let name = nameInput.value;
+    let number = numberInput.value;
     let jerseyColor = document.querySelector('.jersey-color').value;
     let numberColor = document.querySelector('.number-color').value;
     if(name === '' || number === ''){
