@@ -296,4 +296,16 @@ export function getColors() {
         numberColor = '#100ea9';
         return [jerseyColor, numberColor];
     }
+    else if (teamName == "sarmiento") {
+
+        jerseyColor = '#027126';
+        numberColor = '#ffffff';
+        return [jerseyColor, numberColor];
+    }
+    else if (teamName == "platense") {
+
+        jerseyColor = '#865a42';
+        numberColor = '#ffffff';
+        return [jerseyColor, numberColor];
+    }
 }
