@@ -3,7 +3,8 @@
     padding: 0;
 }
 body{
-    background-color: rgb(77, 77, 77);
+    /* background-color: rgb(77, 77, 77); */
+    background-color: #181818;
     font-family: 'Rubik', sans-serif;
 }
 
@@ -23,9 +24,9 @@ body{
     height: 90vh;
     overflow: auto;
     width: 300px;
-    /* background-color: rgb(255, 255, 255); */
     transition: all 0.5s;
-    background-color: #2c2c2c;
+    /* background-color: #2c2c2c; */
+    background-color: #202020;
     color: white;
     /* -webkit-box-shadow: 5px 4px 5px 0 #000000a9;
     box-shadow: 5px 4px 5px 0 #000000a9; */
@@ -118,6 +119,11 @@ body::-webkit-scrollbar {
     /* color:black; */
 }
 
+.player:active{
+    background-color: #4b4b4b;
+    /* color:black; */
+}
+
 .title :target {
     outline: thick;
 
@@ -128,7 +134,8 @@ body::-webkit-scrollbar {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(77, 77, 77);
+    /* background-color: rgb(77, 77, 77); */
+    background-color: #181818;
     height: 90vh;
     width: 100%;
     overflow: hidden;
@@ -138,7 +145,8 @@ body::-webkit-scrollbar {
 .field {
     display: flex;
     justify-content: center;
-    background-color: rgb(77, 77, 77);
+    /* background-color: rgb(77, 77, 77); */
+    background-color: #181818;
 }
 
 .title {
@@ -165,23 +173,10 @@ body::-webkit-scrollbar {
     /* border: solid 1px rgb(217, 255, 0); */
     max-width: 95vh;
     max-height: 100%;
-    background-image: url("./img/campoB.png");
+    background-image: url("./img/campoD.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-
-.screenshot-area {
-    align-items: center;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    height: 100%;
-    background-color: rgb(77, 77, 77);
-    width: 100%;
-    /* border: solid  1px blue; */
-    max-width: 100vh;
-
 }
 
 .header {
@@ -197,7 +192,7 @@ body::-webkit-scrollbar {
     display: none
 }
 
-.main-header {
+.main-header {    
     z-index: 7;
     display: flex;
     flex-direction: row;
@@ -205,7 +200,9 @@ body::-webkit-scrollbar {
     align-items: center;
     width: 100%;
     height: 10vh;
-    background-color: rgb(53, 50, 50);
+    /* background-color: rgb(53, 50, 50); */
+    background-color: #202020;
+    box-shadow: 0 2px 5px #00000078;
     color: white;
 
 }
@@ -302,8 +299,6 @@ body::-webkit-scrollbar {
     width:150px;
     transition: left 1.3s;
 }
-
-
 
 .modal-download{
     display:none;

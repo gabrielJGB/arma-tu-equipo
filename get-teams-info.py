@@ -1,6 +1,7 @@
 #! python3
 import requests
 import bs4
+import re
 
 equipos = ['aldosivi', 'argentinos', 'arsenal', 'atltucuman', 'banfield', 'boca', 'cantralcdba', 'colon', 'defyjusticia', 'estudiantes', 'gimnasia','godoycruz', 'huracan', 'independiente', 'lanus', 'newells', 'patronato', 'racing', 'river', 'central', 'sanlorenzo', 'talleres', 'union', 'velez','platense','sarmiento']
 
@@ -49,7 +50,8 @@ for k in range(len(equipos)):
     content = content + '\t {\n\t\tteamName:"%s",\n\t\tplayers:[\n' %(equipos[k])
 
     for i in range(len(nombres)):
-        content = content + '\t\t\t{number:"%s",name:"%s",position:"' %(numero[i].text.strip(),nombres[i].text.strip())
+        nombre = re.sub(r'\w\. ','',nombres[i].text.strip())
+        content = content + '\t\t\t{number:"%s",name:"%s",position:"' %(numero[i].text.strip(),nombre)
 
         if posicion[i].get('title') == "Portero":
             content = content + "goalkeeper"
@@ -65,6 +67,8 @@ for k in range(len(equipos)):
     print(equipos[k]+ ': Completado')
 
 content = content + ']\n\nexport default teams'
+
+
 
 ruta = "C:\\Users\\GABRIEL\\Desktop\\teamsInfo.txt"
 archivo = open(ruta,'w')

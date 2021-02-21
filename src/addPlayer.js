@@ -12,7 +12,7 @@ function displayFormWindow(){
     acceptButton.addEventListener('click',getPlayerInfo);
     modalWindow.style.display = "flex";
     modalWindow.addEventListener('click',(e)=>{
-        e.preventDefault();
+
         if (e.target.className === 'modal-window') {
             modalWindow.style.display = "none";
         }
