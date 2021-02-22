@@ -1,12 +1,12 @@
-import { hideList, displayMessage, displaySelectedTeam, togglePlayerButton} from './ui.js'
+import { hideList, displayMessage, displaySelectedTeam, togglePlayerButton,getPlayerElement} from './ui.js'
 import makeDraggable from './makeDraggable.js'
 import getTeamName from './index.js'
 
 let taps = 0;
 
-export function createPlayerIcon(number, name, jerseyColor, numberColor,top,left) {
+export function createPlayerIcon(number, name, jerseyColor, numberColor, top, left, icon) {
     const field = document.querySelector('.field');
-    let playerDiv = getPlayerElement(number, name, jerseyColor, numberColor);
+    let playerDiv = getPlayerElement(number, name, jerseyColor, numberColor, icon);
     playerDiv.style.top = top;
     playerDiv.style.left = left;
     field.appendChild(playerDiv);
@@ -15,51 +15,10 @@ export function createPlayerIcon(number, name, jerseyColor, numberColor,top,left
     makePlayerDraggable();
     hideList("-100%");
     // console.log(playerDiv.attributes[2].value)
-    togglePlayerButton(name,number);
+    // togglePlayerButton(name, number);
     displayMessage();
 }
 
-
-
-function getPlayerElement(number, name, jerseyColor, numberColor) {
-    let playerDiv = document.createElement('DIV');
-    playerDiv.className = "player-model player-icon ";
-    playerDiv.setAttribute("contextmenu", "context-menu");
-    playerDiv.setAttribute("data-id", Date.now());
-    playerDiv.innerHTML = `
-    <svg width="52.00000000000001" height="44" xmlns="http://www.w3.org/2000/svg">
-        <g>
-            <title>background</title>
-            <rect x="-1" y="-1" width="54" height="46" id="canvas_background" fill="none" />
-            <g id="canvasGrid" display="none">
-                <rect id="svg_1" width="100%" height="100%" x="0" y="0" stroke-width="0"
-                    fill="url(#gridpattern)" />
-            </g>
-        </g>
-        <g>
-            <title>Doble click para borrar</title>
-            <rect fill="${jerseyColor}" stroke-opacity="null" x="10.79408" y="1.74288" width="28.88527"
-                height="39.63909" id="svg_26" />
-            <rect fill="${jerseyColor}" stroke-opacity="null" x="22.08157" y="-9.38248" width="89.74359"
-                height="55.10556" id="svg_27"
-                transform="matrix(0.11267494015126664,-0.13428060550793872,0.13428060550793872,0.11267494015126664,-0.5787242092674678,17.830566470735473) " />
-
-            <rect fill="${jerseyColor}" stroke-opacity="null" x="139.08044" y="130.05117" width="89.74359"
-                height="55.10556" id="svg_3"
-                transform="rotate(-81 41.31094741821289,10.888059616088865) matrix(0.11267494015126664,-0.13428060550793872,0.13428060550793872,0.11267494015126664,-0.5787242092674678,17.830566470735473) " />
-
-            <text class="player-number" x="-24.40934" y="-24.87449" fill="${numberColor}" stroke-width="0"
-                stroke-opacity="null" id="svg_32" font-size="4" font-family="sans-serif"
-                text-anchor="middle"
-                transform="matrix(5.5037063068223,0,0,4.985333955760002,159.81749203808607,150.19696718464186) "
-                stroke="#0d1c4e">${number}</text>
-        </g>
-    </svg>
-
-    <div class="player-name">${name}</div>
-`
-    return playerDiv;
-}
 
 function makePlayerDraggable() {
     const players = document.querySelectorAll('.player-icon')
@@ -70,14 +29,14 @@ function makePlayerDraggable() {
 
 
 function deletePlayerEventDesktop() {
-    deletePlayer(this)
+    deletePlayer(this);
 }
 
 function deletePlayerEventMobile(player) {
     let tapDelay = 300;
-    player.addEventListener('touchstart', detectTap);
+    player.addEventListener('touchstart', detectDoubleTap);
 
-    function detectTap() {
+    function detectDoubleTap() {
         taps++;
         if (taps == 2) {
             deletePlayer(player);
@@ -91,12 +50,13 @@ function deletePlayerEventMobile(player) {
 }
 
 function deletePlayer(player) {
-    let name = player.children[1].textContent;
-    let number = player.children[0].children[1].children[4].textContent;
+    console.log(player.attributes[2].value)
+    // let name = player.children[1].textContent;
+    // let number = player.children[0].children[1].children[4].textContent;
 
-    togglePlayerButton(name,number);
+    // togglePlayerButton(name, number);
     player.style.transition = "all 0.5s";
-    player.style.opacity = "0";
+    player.style.transform = "scale(0)";
 
     setTimeout(() => {
         player.remove()
@@ -116,7 +76,7 @@ export function getColors() {
 
     else if (teamName == "argentinos") {
 
-        jerseyColor = 'red';
+        jerseyColor = '#ff000f';
         numberColor = '#ffffff';
         return [jerseyColor, numberColor];
     }

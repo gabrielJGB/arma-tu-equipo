@@ -35,11 +35,23 @@ function getPlayerInfo(e){
     let number = numberInput.value;
     let jerseyColor = document.querySelector('.jersey-color').value;
     let numberColor = document.querySelector('.number-color').value;
+    let icon = '';
+
+    if(document.querySelector('#jersey-add').checked){
+        icon = "jersey";
+    }
+    else if(document.querySelector('#circle-add').checked){
+        icon = "circle";
+    }
+    else if(document.querySelector('#no-icon-add').checked){
+        icon = "no-icon";
+    }
+    
     if(name === '' || number === ''){
         alert("Ingrese un nombre y un número");
     }
     else{
-    createPlayerIcon(number,name,jerseyColor,numberColor,top,"");
+    createPlayerIcon(number,name,jerseyColor,numberColor,top,"",icon);
     modalWindow.style.display = "none";
     }
 }
