@@ -60,6 +60,7 @@ function getSelectedPlayerInfo() {
     let top = 10;
     let left = 10;
     let icon = "";
+    let id = this.attributes[0]
     
     if(document.querySelector('#jersey').checked){
         icon = "jersey";
@@ -71,11 +72,13 @@ function getSelectedPlayerInfo() {
         icon = "no-icon";
     }
 
-    createPlayerIcon(number, name, jerseyColor, numberColor, top, left,icon);
-    
+    createPlayerIcon(number, name, jerseyColor, numberColor, top, left,icon,id );
+
 }
 
-
+window.onhashchange = function(e) {
+ console.log("backbutton")
+}
 
 
 

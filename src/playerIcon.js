@@ -2,20 +2,23 @@ import { hideList, displayMessage, displaySelectedTeam, togglePlayerButton,getPl
 import makeDraggable from './makeDraggable.js'
 import getTeamName from './index.js'
 
-let taps = 0;
 
-export function createPlayerIcon(number, name, jerseyColor, numberColor, top, left, icon) {
+
+export function createPlayerIcon(number, name, jerseyColor, numberColor, top, left, icon,id) {
     const field = document.querySelector('.field');
     let playerDiv = getPlayerElement(number, name, jerseyColor, numberColor, icon);
     playerDiv.style.top = top;
     playerDiv.style.left = left;
+    if(id != null){
+        playerDiv.setAttribute("data-id",id.value);
+    }
+    playerDiv.className = "player-model player-icon ";
     field.appendChild(playerDiv);
     deletePlayerEventMobile(playerDiv);
     playerDiv.addEventListener('dblclick', deletePlayerEventDesktop);
     makePlayerDraggable();
     hideList("-100%");
-    // console.log(playerDiv.attributes[2].value)
-    // togglePlayerButton(name, number);
+    togglePlayerButton(id);
     displayMessage();
 }
 
@@ -31,6 +34,8 @@ function makePlayerDraggable() {
 function deletePlayerEventDesktop() {
     deletePlayer(this);
 }
+
+let taps = 0;
 
 function deletePlayerEventMobile(player) {
     let tapDelay = 300;
@@ -50,12 +55,10 @@ function deletePlayerEventMobile(player) {
 }
 
 function deletePlayer(player) {
-    console.log(player.attributes[2].value)
-    // let name = player.children[1].textContent;
-    // let number = player.children[0].children[1].children[4].textContent;
-
-    // togglePlayerButton(name, number);
-    player.style.transition = "all 0.5s";
+    
+    let id = player.attributes[0];
+    togglePlayerButton(id);
+    player.style.transition = "all 0.4s";
     player.style.transform = "scale(0)";
 
     setTimeout(() => {

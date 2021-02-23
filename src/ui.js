@@ -3,6 +3,7 @@ import { createPlayerIcon } from './playerIcon.js'
 let isVisible = false;
 let flag = true;
 let initialX = null;
+let id = 0;
 const sidebar = document.querySelector('.sidebar');
 const toggleSidebarButton = document.querySelector('.toggle-sidebar-button');
 const downloadButton = document.querySelector('.download-button');
@@ -18,26 +19,28 @@ export function displaySelectedTeam(team) {
     const defendersList = document.querySelector('.defenders');
     const midfieldersList = document.querySelector('.midfielders');
     const forwardsList = document.querySelector('.forwards');
+    
     goalkeepersList.innerHTML = "";
     defendersList.innerHTML = "";
     midfieldersList.innerHTML = "";
     forwardsList.innerHTML = "";
 
     team.players.forEach((i) => {
+        id++;
         if (i.position === "goalkeeper") {
-            goalkeepersList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
+            goalkeepersList.innerHTML += `<button data-id="${id}" class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
 
         }
         else if (i.position === "defender") {
-            defendersList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
+            defendersList.innerHTML += `<button data-id="${id}" class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
 
         }
         else if (i.position === "midfielder") {
-            midfieldersList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
+            midfieldersList.innerHTML += `<button data-id="${id}" class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
 
         }
         else if (i.position === "forward") {
-            forwardsList.innerHTML += `<button class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
+            forwardsList.innerHTML += `<button data-id="${id}" class="player"><span class="number">${i.number}</span> - <span class="name">${i.name}</span></button>`;
         }
 
     });
@@ -71,6 +74,7 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
     })
 
 }
+
 
 function toggleList() {
     if (isVisible) {
@@ -106,17 +110,19 @@ function swipeMenu(e) {
     }
     else if (currentX < initialX - window.innerWidth / 4) {
         hideList("-100%");
+        container.removeEventListener("touchmove", swipeMenu);
     }
 }
 
-export function togglePlayerButton(name, number) {
-    const names = document.querySelectorAll('.name');
-
-    names.forEach((i) => {
-        if (i.textContent === name && i.previousElementSibling.textContent === number) {
-            i.parentElement.disabled ? i.parentElement.disabled = false : i.parentElement.disabled = true;
+export function togglePlayerButton(id) {
+    const players = document.querySelectorAll('.player');
+    if(id != null){
+    players.forEach((player) => {
+        if (player.attributes[0].value == id.value) {
+            player.disabled ? player.disabled = false : player.disabled = true;
         }
     });
+    }
 }
 
 function downloadImage() {
@@ -142,7 +148,6 @@ export function setTeamColors() {
     const players = document.querySelectorAll('.player-icon');
     if (this.className == 'jersey-color-team') {
         players.forEach((player) => {
-            console.log(player)
             player.children[0].children[0].children[1].attributes[0].value = this.value;
             player.children[0].children[0].children[2].attributes[0].value = this.value;
             player.children[0].children[0].children[3].attributes[0].value = this.value;
@@ -154,6 +159,22 @@ export function setTeamColors() {
             player.children[0].children[0].children[1].attributes[1].value = this.value;
         })
     }
+}
+
+export function getPlayerElement(number, name, jerseyColor, numberColor, icon) {
+    let playerDiv = document.createElement('DIV');
+
+    if (icon === "jersey") {
+        playerDiv.innerHTML = setIconJersey(jerseyColor, numberColor, number, name)
+    }
+    else if (icon === "circle") {
+        playerDiv.innerHTML = setIconCircle(jerseyColor, numberColor, number, name)
+    }
+    else if (icon === "no-icon") {
+        playerDiv.innerHTML = setIconNone(jerseyColor, numberColor, number, name);
+       
+    }
+    return playerDiv;
 }
 
 export function changeIcons(option) {
@@ -238,21 +259,3 @@ function setIconNone(jerseyColor, numberColor, number, name){
     `
 }
 
-export function getPlayerElement(number, name, jerseyColor, numberColor, icon) {
-    let playerDiv = document.createElement('DIV');
-    playerDiv.className = "player-model player-icon ";
-    playerDiv.setAttribute("contextmenu", "context-menu");
-    playerDiv.setAttribute("data-id", Date.now());
-
-    if (icon === "jersey") {
-        playerDiv.innerHTML = setIconJersey(jerseyColor, numberColor, number, name)
-    }
-    else if (icon === "circle") {
-        playerDiv.innerHTML = setIconCircle(jerseyColor, numberColor, number, name)
-    }
-    else if (icon === "no-icon") {
-        playerDiv.innerHTML = setIconNone(jerseyColor, numberColor, number, name);
-       
-    }
-    return playerDiv;
-}

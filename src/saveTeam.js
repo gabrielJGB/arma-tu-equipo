@@ -23,7 +23,7 @@ function showFormationWindow() {
     for (let i = 0; i < count + 1; i++) {
         let title = window.localStorage.key(i);
         if (title != 'count') {
-            formationsBox.innerHTML += `<div class="item"><button class="formation-button">${title}</button><button class="delete-button">x</button></div>`;
+            formationsBox.innerHTML += `<div class="item"><button class="formation-button">${title}<button class="delete-button">Borrar</button></div>`;
         }
     }
 
@@ -99,7 +99,7 @@ function processFormation(formation) {
         let topPosition = i.topPosition;
         let leftPosition = i.leftPosition;
 
-        createPlayerIcon(number, name, jerseyColor, numberColor, topPosition, leftPosition);
+        createPlayerIcon(number, name, jerseyColor, numberColor, topPosition, leftPosition,"jersey",null);
     })
 }
 
@@ -121,17 +121,17 @@ function saveFormation() {
         }
         else {
             players.forEach((player) => {
+                let name = player.children[1].textContent;
+                let number = player.children[0].children[0].children[4].textContent;
+                let jerseyColor = player.children[0].children[0].children[1].attributes[0].value;
+                let numberColor = player.children[0].children[0].children[4].attributes[0].value;
                 let topPosition = player.style.top;
                 let leftPosition = player.style.left;
-                let name = player.children[1].textContent;
-                let jerseyColor = player.children[0].children[1].children[1].attributes[0].value;
-                let number = player.children[0].children[1].children[4].textContent;
-                let numberColor = player.children[0].children[1].children[4].attributes[3].value;
-                let dataId = player.attributes[2].value
+                let dataId = player.attributes[2].value;
                 let playerData = { topPosition, leftPosition, name, number, numberColor, jerseyColor, dataId }
                 playersToSave.push(playerData);
             })
-            console.log("oks")
+            
             window.localStorage.setItem(title, JSON.stringify(playersToSave));
             count += 1;
             window.localStorage.setItem("count", count);
