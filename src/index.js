@@ -77,7 +77,7 @@ function getSelectedPlayerInfo() {
 }
 
 window.onhashchange = function(e) {
- console.log("backbutton")
+ alert("back")
 }
 
 
