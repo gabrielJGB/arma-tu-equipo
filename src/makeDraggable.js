@@ -1,11 +1,9 @@
 export default function makeDraggable(elmnt) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
     elmnt.onmousedown = dragDown;
     elmnt.ontouchstart = dragDown;
 
     function dragDown(e) {
-        
         e = e || window.event;
         e.preventDefault();
         if(e.type == 'mousedown'){

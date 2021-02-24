@@ -4,6 +4,7 @@ let isVisible = false;
 let flag = true;
 let initialX = null;
 let id = 0;
+let scale = 0;
 const sidebar = document.querySelector('.sidebar');
 const toggleSidebarButton = document.querySelector('.toggle-sidebar-button');
 const downloadButton = document.querySelector('.download-button');
@@ -45,8 +46,8 @@ export function displaySelectedTeam(team) {
 
     });
 
-
 }
+
 export function displayMessage() {
     const message = document.querySelector('.message');
     if (flag) {
@@ -69,10 +70,23 @@ export function displayMessage() {
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     const arrow = document.querySelector('.arrow');
     arrow.style.left = "-40px";
-    document.addEventListener('touchstart', () => {
-        arrow.style.left = "-70vh";
-    })
+    document.addEventListener('touchstart', (e) => {
+        if(e.target.className == 'arrow'){
+        setTimeout(() => {
+            arrow.style.left = "60px";
+        }, 0);
+        setTimeout(() => {
+            arrow.style.left = "-50vh";
+        }, 300);
+        setTimeout(() => {
+            arrow.style.display = "none";
+        }, 1000);
+    }
+   
+    });
+    scale = 0.71;
 }
+scale = 0.9
 
 
 function toggleList() {
@@ -98,6 +112,9 @@ function swipeStart(e) {
     if (e.target.className === "field" || e.target.className === "sidebar" || e.target.className === "player" || e.target.className === "arrow" || e.target.className === "position") {
         initialX = e.touches[0].clientX;
         container.addEventListener("touchmove", swipeMenu);
+    }
+    else{
+        container.removeEventListener("touchmove", swipeMenu);
     }
 
 }
@@ -151,17 +168,16 @@ document.querySelectorAll('.zoom-buttons button').forEach((i)=>{i.addEventListen
     players.forEach((player)=>{
         
         if(e.target.textContent === '+'){
-            let scale = player.style.transform;
-            console.log(scale)
-            scale = parseFloat(scale.replace("scale(","").replace(")",""));
-            scale = scale + 0.05
-            player.style.transform = `scale(${scale})`
+            // console.log(scale)
+            // scale = parseFloat(scale.replace("scale(","").replace(")",""));
+            scale = scale + 0.05;
+            player.style.transform = `scale(${scale})`;
         }
         else if(e.target.textContent === '-'){
-            let scale = player.style.transform;
-            scale = parseFloat(scale.replace("scale(","").replace(")",""));
-            scale = scale - 0.05
-            player.style.transform = `scale(${scale})`
+            // let scale = player.style.transform;
+            // scale = parseFloat(scale.replace("scale(","").replace(")",""));
+            scale = scale - 0.05;
+            player.style.transform = `scale(${scale})`;
         }
     })
 }

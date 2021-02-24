@@ -5,7 +5,6 @@ import { } from './addPlayer.js'
 import { } from './saveTeam.js'
 
 if ("serviceWorker" in navigator) {
-    // register service worker
     navigator.serviceWorker.register("service-worker.js");
 }
 
@@ -57,28 +56,23 @@ function getSelectedPlayerInfo() {
     let name = this.children[1].textContent;
     let jerseyColor =  jerseyTeamColor.value;
     let numberColor =  numberTeamColor.value;
-    let top = 10;
-    let left = 10;
+    let top = null;
+    let left = null;
     let icon = "";
-    let id = this.attributes[0]
+    let id = this.attributes[0];
     
     if(document.querySelector('#jersey').checked){
         icon = "jersey";
     }
     else if(document.querySelector('#circle').checked){
-        icon = "circle"
+        icon = "circle";
     }
     else if(document.querySelector('#no-icon').checked){
         icon = "no-icon";
     }
 
-    createPlayerIcon(number, name, jerseyColor, numberColor, top, left,icon,id );
+    createPlayerIcon(number, name, jerseyColor, numberColor, top, left,icon,id);
 
 }
-
-window.onhashchange = function(e) {
- alert("back")
-}
-
 
 

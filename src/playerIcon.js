@@ -7,8 +7,10 @@ import getTeamName from './index.js'
 export function createPlayerIcon(number, name, jerseyColor, numberColor, top, left, icon,id) {
     const field = document.querySelector('.field');
     let playerDiv = getPlayerElement(number, name, jerseyColor, numberColor, icon);
-    playerDiv.style.top = top;
-    playerDiv.style.left = left;
+    if(top != null && left != null){
+        playerDiv.style.top = top;
+        playerDiv.style.left = left;
+    }
     if(id != null){
         playerDiv.setAttribute("data-id",id.value);
     }
