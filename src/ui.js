@@ -72,7 +72,6 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
     document.addEventListener('touchstart', () => {
         arrow.style.left = "-70vh";
     })
-
 }
 
 
@@ -142,6 +141,29 @@ function downloadImage() {
                 return Canvas2Image.saveAsPNG(canvas);
             })
     }
+}
+
+
+document.querySelectorAll('.zoom-buttons button').forEach((i)=>{i.addEventListener('click',zoom)})
+
+ function zoom(e){
+    const players = document.querySelectorAll('.player-icon')
+    players.forEach((player)=>{
+        
+        if(e.target.textContent === '+'){
+            let scale = player.style.transform;
+            console.log(scale)
+            scale = parseFloat(scale.replace("scale(","").replace(")",""));
+            scale = scale + 0.05
+            player.style.transform = `scale(${scale})`
+        }
+        else if(e.target.textContent === '-'){
+            let scale = player.style.transform;
+            scale = parseFloat(scale.replace("scale(","").replace(")",""));
+            scale = scale - 0.05
+            player.style.transform = `scale(${scale})`
+        }
+    })
 }
 
 export function setTeamColors() {

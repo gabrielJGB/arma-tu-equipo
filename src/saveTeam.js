@@ -1,6 +1,6 @@
 import { createPlayerIcon, getColors } from "./playerIcon.js";
 
-let count = 0;
+
 const saveButton = document.querySelector('.save-button');
 const loadButton = document.querySelector('.load-button');
 const modal = document.querySelector('.modal-load');
@@ -10,7 +10,7 @@ saveButton.addEventListener('click', saveFormation);
 loadButton.addEventListener('click', showFormationWindow);
 
 function showFormationWindow() {
-    count = Number(window.localStorage.getItem("count"));
+    let count = Number(window.localStorage.getItem("count"));
     const formationsBox = document.querySelector('.box');
 
     formationsBox.innerHTML = '';
@@ -39,14 +39,8 @@ function showFormationWindow() {
     deleteButton.forEach((el) => {
         el.addEventListener('click', (e) => {
             let key = e.target.previousElementSibling.textContent;
-    
-            if(deleteFormation(key)){
-                e.target.previousElementSibling.parentNode.remove();
-            }
-            else{
-                console.log('error')
-            }
-            
+            deleteFormation(key)
+            e.target.previousElementSibling.parentNode.remove();            
         });
     })
 
@@ -59,25 +53,16 @@ function showFormationWindow() {
         })
     })
 }
-function deleteFormation(key) {
-    let found = false;
 
-    for (let i = 0; i < count + 1; i++) {
-        let savedKey = window.localStorage.key(i);
-        if (savedKey != 'count') {
-            if (savedKey == key)
-                found = true;
-            localStorage.removeItem(key);
-            count = count - 1;
-            window.localStorage.setItem("count", count);
-        }
-    }
-    
-    if (found) {return true}
-    else { return false }
+function deleteFormation(key) {
+    let count = Number(window.localStorage.getItem("count"));
+    localStorage.removeItem(key);
+    count--;
+    window.localStorage.setItem("count", count);
 }
 
 function displayFormation(key) {
+    let count = Number(window.localStorage.getItem("count"));
     for (let i = 0; i < count + 1; i++) {
         let title = window.localStorage.key(i);
         if (title != "count") {
@@ -105,19 +90,46 @@ function processFormation(formation) {
 
 function saveFormation() {
     const players = document.querySelectorAll('.player-icon');
+    let count = Number(window.localStorage.getItem("count"));
     let playersToSave = [];
+    let title = '';
+    
 
     if (field.innerHTML === "") {
         alert("Agrega jugadores al campo de juego");
     }
     else {
-        let title = prompt("Ingrese un título:");
+        let titles = [];
+        let save = true;
+
+        for(let i = 0; i < count + 1; i++){
+            titles[i] = window.localStorage.key(i);
+        }
+        do{
+            title = prompt("Ingresa un título:");
+            if(title != null){
+                if(titles.includes(title)){
+                    alert("El título ya existe. Ingresa otro")
+                    save = false;
+                }
+                else{
+                    save = true;
+                }
+            }
+            else{
+                return;
+            }
+
+            
+        }
+        while(save === false);
+
 
         if (title === "") {
             title = "Formación " + count;
         }
         else if (title === null) {
-
+            console.log("null")
         }
         else {
             players.forEach((player) => {
@@ -127,15 +139,24 @@ function saveFormation() {
                 let numberColor = player.children[0].children[0].children[4].attributes[0].value;
                 let topPosition = player.style.top;
                 let leftPosition = player.style.left;
-                let dataId = player.attributes[2].value;
+                let dataId =  "";
+                if(player.hasAttribute("data-id")){
+                    dataId = player.attributes[2].value;
+                }
+                else{
+                    dataId = null;
+                }
+
                 let playerData = { topPosition, leftPosition, name, number, numberColor, jerseyColor, dataId }
                 playersToSave.push(playerData);
             })
             
             window.localStorage.setItem(title, JSON.stringify(playersToSave));
-            count += 1;
+            count++;
             window.localStorage.setItem("count", count);
             alert("Formación guardada");
         }
     }
 }
+
+
