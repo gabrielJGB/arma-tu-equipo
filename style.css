@@ -700,4 +700,8 @@ body::-webkit-scrollbar {
     .zoom-buttons{
         bottom:8vh;
     }
+    .zoom-buttons button:hover{
+        color: #616161;
+        border: solid 2px #616161;
+    }
 }

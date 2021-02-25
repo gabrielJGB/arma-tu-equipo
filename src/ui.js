@@ -1,5 +1,3 @@
-import { createPlayerIcon } from './playerIcon.js'
-
 let isVisible = false;
 let flag = true;
 let initialX = null;
@@ -71,7 +69,6 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
     const arrow = document.querySelector('.arrow');
     arrow.style.left = "-40px";
     document.addEventListener('touchstart', (e) => {
-        if(e.target.className == 'arrow'){
         setTimeout(() => {
             arrow.style.left = "60px";
         }, 0);
@@ -81,13 +78,13 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
         setTimeout(() => {
             arrow.style.display = "none";
         }, 1000);
-    }
-   
     });
+
     scale = 0.71;
 }
-scale = 0.9
-
+else{
+    scale = 0.9;
+}
 
 function toggleList() {
     if (isVisible) {
@@ -160,7 +157,6 @@ function downloadImage() {
     }
 }
 
-
 document.querySelectorAll('.zoom-buttons button').forEach((i)=>{i.addEventListener('click',zoom)})
 
  function zoom(e){
@@ -168,18 +164,22 @@ document.querySelectorAll('.zoom-buttons button').forEach((i)=>{i.addEventListen
     players.forEach((player)=>{
         
         if(e.target.textContent === '+'){
-            // console.log(scale)
-            // scale = parseFloat(scale.replace("scale(","").replace(")",""));
+            scale =  player.style.transform;
+            scale = parseFloat(scale.replace("scale(","").replace(")",""));
             scale = scale + 0.05;
             player.style.transform = `scale(${scale})`;
         }
         else if(e.target.textContent === '-'){
-            // let scale = player.style.transform;
-            // scale = parseFloat(scale.replace("scale(","").replace(")",""));
+            scale = player.style.transform;
+            scale = parseFloat(scale.replace("scale(","").replace(")",""));
             scale = scale - 0.05;
             player.style.transform = `scale(${scale})`;
         }
     })
+}
+
+export function getScaleValue(){
+    return scale;
 }
 
 export function setTeamColors() {

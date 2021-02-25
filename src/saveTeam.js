@@ -1,6 +1,5 @@
 import { createPlayerIcon, getColors } from "./playerIcon.js";
 
-
 const saveButton = document.querySelector('.save-button');
 const loadButton = document.querySelector('.load-button');
 const modal = document.querySelector('.modal-load');
@@ -40,7 +39,7 @@ function showFormationWindow() {
         el.addEventListener('click', (e) => {
             let key = e.target.previousElementSibling.textContent;
             deleteFormation(key)
-            e.target.previousElementSibling.parentNode.remove();            
+            e.target.previousElementSibling.parentNode.remove();
         });
     })
 
@@ -83,9 +82,10 @@ function processFormation(formation) {
         let numberColor = i.numberColor;
         let topPosition = i.topPosition;
         let leftPosition = i.leftPosition;
+        let scale = i.scale;
 
-        createPlayerIcon(number, name, jerseyColor, numberColor, topPosition, leftPosition,"jersey",null);
-    })
+        createPlayerIcon(number, name, jerseyColor, numberColor, topPosition, leftPosition, "jersey", null, scale);
+    });
 }
 
 function saveFormation() {
@@ -93,7 +93,7 @@ function saveFormation() {
     let count = Number(window.localStorage.getItem("count"));
     let playersToSave = [];
     let title = '';
-    
+
 
     if (field.innerHTML === "") {
         alert("Agrega jugadores al campo de juego");
@@ -102,60 +102,58 @@ function saveFormation() {
         let titles = [];
         let save = true;
 
-        for(let i = 0; i < count + 1; i++){
+        for (let i = 0; i < count + 1; i++) {
             titles[i] = window.localStorage.key(i);
         }
-        do{
+        do {
             title = prompt("Ingresa un título:");
-            if(title != null){
-                if(titles.includes(title)){
-                    alert("El título ya existe. Ingresa otro")
+            if (title != null) {
+                if (titles.includes(title)) {
+                    alert("El título ya existe. Ingresa otro");
                     save = false;
                 }
-                else{
+                else {
                     save = true;
                 }
             }
-            else{
+            else {
                 return;
             }
-
-            
         }
-        while(save === false);
+        while (save === false);
 
 
         if (title === "") {
-            title = "Formación " + count;
+            title = "Formación " + (count+1);
         }
-        else if (title === null) {
-            console.log("null")
-        }
-        else {
-            players.forEach((player) => {
-                let name = player.children[1].textContent;
-                let number = player.children[0].children[0].children[4].textContent;
-                let jerseyColor = player.children[0].children[0].children[1].attributes[0].value;
-                let numberColor = player.children[0].children[0].children[4].attributes[0].value;
-                let topPosition = player.style.top;
-                let leftPosition = player.style.left;
-                let dataId =  "";
-                if(player.hasAttribute("data-id")){
-                    dataId = player.attributes[2].value;
-                }
-                else{
-                    dataId = null;
-                }
 
-                let playerData = { topPosition, leftPosition, name, number, numberColor, jerseyColor, dataId }
-                playersToSave.push(playerData);
-            })
-            
-            window.localStorage.setItem(title, JSON.stringify(playersToSave));
-            count++;
-            window.localStorage.setItem("count", count);
-            alert("Formación guardada");
-        }
+        players.forEach((player) => {
+            let name = player.children[1].textContent;
+            let number = player.children[0].children[0].children[4].textContent;
+            let jerseyColor = player.children[0].children[0].children[1].attributes[0].value;
+            let numberColor = player.children[0].children[0].children[4].attributes[0].value;
+            let topPosition = player.style.top;
+            let leftPosition = player.style.left;
+            let scale = player.style.transform;
+            scale = parseFloat(scale.replace("scale(","").replace(")",""));
+
+            let dataId = "";
+            if (player.hasAttribute("data-id")) {
+                dataId = player.attributes[2].value;
+            }
+            else {
+                dataId = null;
+            }
+
+            let playerData = { topPosition, leftPosition, name, number, numberColor, jerseyColor, dataId, scale}
+            playersToSave.push(playerData);
+        })
+
+        window.localStorage.setItem(title, JSON.stringify(playersToSave));
+        count++;
+        window.localStorage.setItem("count", count);
+        alert("Formación guardada");
+
     }
 }
 

@@ -4,9 +4,10 @@ import getTeamName from './index.js'
 
 
 
-export function createPlayerIcon(number, name, jerseyColor, numberColor, top, left, icon,id) {
+export function createPlayerIcon(number, name, jerseyColor, numberColor, top, left, icon,id,scale) {
     const field = document.querySelector('.field');
     let playerDiv = getPlayerElement(number, name, jerseyColor, numberColor, icon);
+
     if(top != null && left != null){
         playerDiv.style.top = top;
         playerDiv.style.left = left;
@@ -14,6 +15,7 @@ export function createPlayerIcon(number, name, jerseyColor, numberColor, top, le
     if(id != null){
         playerDiv.setAttribute("data-id",id.value);
     }
+    playerDiv.style.transform = `scale(${scale})`
     playerDiv.className = "player-model player-icon ";
     field.appendChild(playerDiv);
     deletePlayerEventMobile(playerDiv);

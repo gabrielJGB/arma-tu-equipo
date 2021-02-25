@@ -1,4 +1,4 @@
-import { displaySelectedTeam, hideList, setTeamColors,changeIcons } from './ui.js'
+import { displaySelectedTeam, hideList, setTeamColors,changeIcons, getScaleValue} from './ui.js'
 import { createPlayerIcon, getColors } from './playerIcon.js'
 import teams from './teamsInfo.js'
 import { } from './addPlayer.js'
@@ -51,6 +51,7 @@ function addPlayerButtonEvent() {
     })
 }
 
+
 function getSelectedPlayerInfo() {
     let number = this.children[0].textContent;
     let name = this.children[1].textContent;
@@ -60,6 +61,8 @@ function getSelectedPlayerInfo() {
     let left = null;
     let icon = "";
     let id = this.attributes[0];
+
+    let scale = getScaleValue();
     
     if(document.querySelector('#jersey').checked){
         icon = "jersey";
@@ -71,8 +74,7 @@ function getSelectedPlayerInfo() {
         icon = "no-icon";
     }
 
-    createPlayerIcon(number, name, jerseyColor, numberColor, top, left,icon,id);
-
+    createPlayerIcon(number, name, jerseyColor, numberColor, top, left,icon,id,scale);
 }
 
 
