@@ -22,6 +22,7 @@
         <button class="toggle-sidebar-button">&#9776;</button>
 
         <button type="button" class="download-button-mobile">Guardar imagen</button>
+
         <div class="menu-bar">
             <button class="save-button">Guardar</button>
             <button class="load-button">Cargar</button>
@@ -66,34 +67,36 @@
                     <option value="velez">Vélez</option>
                 </select>
 
-                <div class="position">Configuración</div>
+                <div class="config position">Configuración</div>
 
-                <div class="icon-options">
-                    <div class="icon-option">
-                        <input type="radio" id="jersey" name="icon" value="jersey" checked />
-                        <label for="jersey">Camiseta</label>
+                <div class="config-box players">
+                    <div class="icon-options">
+                        <div class="icon-option">
+                            <input type="radio" id="jersey" name="icon" value="jersey" checked />
+                            <label for="jersey">Camiseta</label>
+                        </div>
+                        <div class="icon-option">
+                            <input type="radio" id="circle" name="icon" value="circle" />
+                            <label for="circle">Círculo</label>
+                        </div>
+                        <div class="icon-option">
+                            <input type="radio" id="no-icon" name="icon" value="no-icon" />
+                            <label for="no-icon">Sin icono</label>
+                        </div>
                     </div>
-                    <div class="icon-option">
-                        <input type="radio" id="circle" name="icon" value="circle" />
-                        <label for="circle">Círculo</label>
-                    </div>
-                    <div class="icon-option">
-                        <input type="radio" id="no-icon" name="icon" value="no-icon" />
-                        <label for="no-icon">Sin icono</label>
+                    <div class="colors2">
+                        <div class="color-box2">
+                            <label>Color principal:</label>
+                            <input class="jersey-color-team" type="color">
+                        </div>
+                        <div class="color-box2">
+                            <label>Color secundario:</label>
+                            <input class="number-color-team" type="color" value="#ffffff">
+                        </div>
                     </div>
                 </div>
-                <div class="colors2">
-                    <div class="color-box2">
-                        <label>Color principal:</label>
-                        <input class="jersey-color-team" type="color">
-                    </div>
-                    <div class="color-box2">
-                        <label>Color secundario:</label>
-                        <input class="number-color-team" type="color" value="#ffffff">
-                    </div>
-                </div>
 
-                <label class="position">ARQUEROS</label>
+                <label class="position first">ARQUEROS</label>
                 <div class="players goalkeepers"></div>
 
                 <label class="position">DEFENSORES</label>

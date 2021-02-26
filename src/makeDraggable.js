@@ -37,8 +37,10 @@ export default function makeDraggable(elmnt) {
             pos3 = e.touches[0].clientX;
             pos4 = e.touches[0].clientY;
         }
-        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        let topvar = ((elmnt.offsetTop - pos2)*100) / window.innerHeight;
+        let leftvar = ((elmnt.offsetLeft - pos1)*100) / window.innerWidth;
+        elmnt.style.top = topvar + "%";
+        elmnt.style.left = leftvar + "%";
     }
 
     function closeDragElement() {

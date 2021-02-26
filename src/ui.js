@@ -18,7 +18,7 @@ export function displaySelectedTeam(team) {
     const defendersList = document.querySelector('.defenders');
     const midfieldersList = document.querySelector('.midfielders');
     const forwardsList = document.querySelector('.forwards');
-    
+
     goalkeepersList.innerHTML = "";
     defendersList.innerHTML = "";
     midfieldersList.innerHTML = "";
@@ -47,23 +47,34 @@ export function displaySelectedTeam(team) {
 }
 
 export function displayMessage() {
-    const message = document.querySelector('.message');
+
     if (flag) {
+        const message = document.querySelector('.message');
+        message.style.display = "block";
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             message.textContent = 'Doble tap en el jugador para borrarlo';
         } else {
             message.textContent = 'Doble click en el jugador para borrarlo';
         }
-        message.style.left = "2vh";
         setTimeout(() => {
-            message.style.left = "-140vh";
-        }, 5000)
+            message.style.display = "none";
+        }, 4500)
         flag = false;
         message.addEventListener('click', () => {
-            message.style.left = "-140vh";
+            message.style.display = "none";
         })
     }
 }
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth === 700) {
+        const players = document.querySelectorAll('.player-icon');
+        players.forEach((player) => {
+            console.log(player.style.left)
+        })
+    }
+
+})
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     const arrow = document.querySelector('.arrow');
@@ -82,7 +93,7 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
     scale = 0.71;
 }
-else{
+else {
     scale = 0.9;
 }
 
@@ -110,7 +121,7 @@ function swipeStart(e) {
         initialX = e.touches[0].clientX;
         container.addEventListener("touchmove", swipeMenu);
     }
-    else{
+    else {
         container.removeEventListener("touchmove", swipeMenu);
     }
 
@@ -129,12 +140,12 @@ function swipeMenu(e) {
 
 export function togglePlayerButton(id) {
     const players = document.querySelectorAll('.player');
-    if(id != null){
-    players.forEach((player) => {
-        if (player.attributes[0].value == id.value) {
-            player.disabled ? player.disabled = false : player.disabled = true;
-        }
-    });
+    if (id != null) {
+        players.forEach((player) => {
+            if (player.attributes[0].value == id.value) {
+                player.disabled ? player.disabled = false : player.disabled = true;
+            }
+        });
     }
 }
 
@@ -157,28 +168,28 @@ function downloadImage() {
     }
 }
 
-document.querySelectorAll('.zoom-buttons button').forEach((i)=>{i.addEventListener('click',zoom)})
+document.querySelectorAll('.zoom-buttons button').forEach((i) => { i.addEventListener('click', zoom) })
 
- function zoom(e){
+function zoom(e) {
     const players = document.querySelectorAll('.player-icon')
-    players.forEach((player)=>{
-        
-        if(e.target.textContent === '+'){
-            scale =  player.style.transform;
-            scale = parseFloat(scale.replace("scale(","").replace(")",""));
+    players.forEach((player) => {
+
+        if (e.target.textContent === '+') {
+            scale = player.style.transform;
+            scale = parseFloat(scale.replace("scale(", "").replace(")", ""));
             scale = scale + 0.05;
             player.style.transform = `scale(${scale})`;
         }
-        else if(e.target.textContent === '-'){
+        else if (e.target.textContent === '-') {
             scale = player.style.transform;
-            scale = parseFloat(scale.replace("scale(","").replace(")",""));
+            scale = parseFloat(scale.replace("scale(", "").replace(")", ""));
             scale = scale - 0.05;
             player.style.transform = `scale(${scale})`;
         }
     })
 }
 
-export function getScaleValue(){
+export function getScaleValue() {
     return scale;
 }
 
@@ -210,7 +221,7 @@ export function getPlayerElement(number, name, jerseyColor, numberColor, icon) {
     }
     else if (icon === "no-icon") {
         playerDiv.innerHTML = setIconNone(jerseyColor, numberColor, number, name);
-       
+
     }
     return playerDiv;
 }
@@ -219,7 +230,7 @@ export function changeIcons(option) {
     const players = document.querySelectorAll('.player-icon');
 
     players.forEach((player) => {
-        
+
         let name = player.children[1].textContent;
         let number = player.children[0].children[0].children[4].textContent;
         let jerseyColor = player.children[0].children[0].children[1].attributes[0].value;
@@ -282,7 +293,7 @@ function setIconCircle(jerseyColor, numberColor, number, name) {
         <div class="player-name">${name}</div>
         `
 }
-function setIconNone(jerseyColor, numberColor, number, name){
+function setIconNone(jerseyColor, numberColor, number, name) {
     return `
     <svg width="0" height="40" viewBox="0 0 70 70">
     <g>

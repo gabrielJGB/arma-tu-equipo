@@ -20,7 +20,7 @@ function showFormationWindow() {
     }
 
     for (let i = 0; i < count + 1; i++) {
-        let title = window.localStorage.key(i);
+        let title = window.localStorage.key(i);                          
         if (title != 'count') {
             formationsBox.innerHTML += `<div class="item"><button class="formation-button">${title}<button class="delete-button">Borrar</button></div>`;
         }
@@ -37,9 +37,15 @@ function showFormationWindow() {
     const deleteButton = document.querySelectorAll('.delete-button');
     deleteButton.forEach((el) => {
         el.addEventListener('click', (e) => {
-            let key = e.target.previousElementSibling.textContent;
-            deleteFormation(key)
-            e.target.previousElementSibling.parentNode.remove();
+            if (confirm("Estas seguro?")) {
+                let key = e.target.previousElementSibling.textContent;
+                deleteFormation(key)
+                e.target.previousElementSibling.parentNode.remove();
+            }
+            else {
+                return;
+            }
+
         });
     })
 
@@ -49,8 +55,8 @@ function showFormationWindow() {
             let key = formation.textContent;
             field.innerHTML = '';
             displayFormation(key);
-        })
-    })
+        });
+    });
 }
 
 function deleteFormation(key) {
@@ -122,9 +128,10 @@ function saveFormation() {
         }
         while (save === false);
 
+        let d = new Date();
 
         if (title === "") {
-            title = "Formación " + (count+1);
+            title = `Formación ${count}`;
         }
 
         players.forEach((player) => {
@@ -135,7 +142,7 @@ function saveFormation() {
             let topPosition = player.style.top;
             let leftPosition = player.style.left;
             let scale = player.style.transform;
-            scale = parseFloat(scale.replace("scale(","").replace(")",""));
+            scale = parseFloat(scale.replace("scale(", "").replace(")", ""));
 
             let dataId = "";
             if (player.hasAttribute("data-id")) {
@@ -145,7 +152,7 @@ function saveFormation() {
                 dataId = null;
             }
 
-            let playerData = { topPosition, leftPosition, name, number, numberColor, jerseyColor, dataId, scale}
+            let playerData = { topPosition, leftPosition, name, number, numberColor, jerseyColor, dataId, scale }
             playersToSave.push(playerData);
         })
 
