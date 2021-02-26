@@ -50,7 +50,7 @@ for k in range(len(equipos)):
     content = content + '\t {\n\t\tteamName:"%s",\n\t\tplayers:[\n' %(equipos[k])
 
     for i in range(len(nombres)):
-        nombre = re.sub(r'\w\. ','',nombres[i].text.strip())
+        nombre = re.sub(r'\w+ ','',nombres[i].text.strip())
         content = content + '\t\t\t{number:"%s",name:"%s",position:"' %(numero[i].text.strip(),nombre)
 
         if posicion[i].get('title') == "Portero":

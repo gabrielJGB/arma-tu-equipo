@@ -37,7 +37,7 @@ function showFormationWindow() {
     const deleteButton = document.querySelectorAll('.delete-button');
     deleteButton.forEach((el) => {
         el.addEventListener('click', (e) => {
-            if (confirm("Estas seguro?")) {
+            if (confirm("Confirmar")) {
                 let key = e.target.previousElementSibling.textContent;
                 deleteFormation(key)
                 e.target.previousElementSibling.parentNode.remove();
@@ -89,8 +89,9 @@ function processFormation(formation) {
         let topPosition = i.topPosition;
         let leftPosition = i.leftPosition;
         let scale = i.scale;
-
-        createPlayerIcon(number, name, jerseyColor, numberColor, topPosition, leftPosition, "jersey", null, scale);
+        // let icon = i.icon;
+        
+        createPlayerIcon(number, name, jerseyColor, numberColor, topPosition, leftPosition,"circle", null, scale);
     });
 }
 
@@ -128,13 +129,12 @@ function saveFormation() {
         }
         while (save === false);
 
-        let d = new Date();
-
         if (title === "") {
             title = `Formación ${count}`;
         }
 
         players.forEach((player) => {
+            console.log(player)
             let name = player.children[1].textContent;
             let number = player.children[0].children[0].children[4].textContent;
             let jerseyColor = player.children[0].children[0].children[1].attributes[0].value;
@@ -143,16 +143,17 @@ function saveFormation() {
             let leftPosition = player.style.left;
             let scale = player.style.transform;
             scale = parseFloat(scale.replace("scale(", "").replace(")", ""));
-
             let dataId = "";
+            // let icon = player.attributes[0].value;
+
             if (player.hasAttribute("data-id")) {
-                dataId = player.attributes[2].value;
+                dataId = player.attributes[1].value;
             }
             else {
                 dataId = null;
             }
 
-            let playerData = { topPosition, leftPosition, name, number, numberColor, jerseyColor, dataId, scale }
+            let playerData = { topPosition, leftPosition, name, number, numberColor, jerseyColor, dataId, scale}
             playersToSave.push(playerData);
         })
 

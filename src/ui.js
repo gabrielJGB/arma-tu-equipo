@@ -212,15 +212,17 @@ export function setTeamColors() {
 
 export function getPlayerElement(number, name, jerseyColor, numberColor, icon) {
     let playerDiv = document.createElement('DIV');
-
     if (icon === "jersey") {
-        playerDiv.innerHTML = setIconJersey(jerseyColor, numberColor, number, name)
+        playerDiv.innerHTML = setIconJersey(jerseyColor, numberColor, number, name);
+        playerDiv.setAttribute("data-icon","jersey");
     }
     else if (icon === "circle") {
-        playerDiv.innerHTML = setIconCircle(jerseyColor, numberColor, number, name)
+        playerDiv.innerHTML = setIconCircle(jerseyColor, numberColor, number, name);
+        playerDiv.setAttribute("data-icon","circle");
     }
     else if (icon === "no-icon") {
         playerDiv.innerHTML = setIconNone(jerseyColor, numberColor, number, name);
+        playerDiv.setAttribute("data-icon","no-icon");
 
     }
     return playerDiv;
@@ -237,13 +239,16 @@ export function changeIcons(option) {
         let numberColor = player.children[0].children[0].children[4].attributes[0].value;
 
         if (option.id == 'jersey') {
-            player.innerHTML = setIconJersey(jerseyColor, numberColor, number, name)
+            player.innerHTML = setIconJersey(jerseyColor, numberColor, number, name);
+            // player.setAttribute("data-id","jersey");
         }
         else if (option.id == 'circle') {
-            player.innerHTML = setIconCircle(jerseyColor, numberColor, number, name)
+            player.innerHTML = setIconCircle(jerseyColor, numberColor, number, name);
+            // player.setAttribute("data-id","circle");
         }
         if (option.id == 'no-icon') {
-            player.innerHTML = setIconNone(jerseyColor, numberColor, number, name)
+            player.innerHTML = setIconNone(jerseyColor, numberColor, number, name);
+            // player.setAttribute("data-id","no-icon");
         }
     });
 }

@@ -60,7 +60,7 @@ function deletePlayerEventMobile(player) {
 
 function deletePlayer(player) {
     
-    let id = player.attributes[0];
+    let id = player.attributes[1];
     togglePlayerButton(id);
     player.style.transition = "all 0.4s";
     player.style.transform = "scale(0)";
