@@ -21,7 +21,7 @@ export function createPlayerIcon(number, name, jerseyColor, numberColor, top, le
     deletePlayerEventMobile(playerDiv);
     playerDiv.addEventListener('dblclick', deletePlayerEventDesktop);
     makePlayerDraggable();
-    hideList("-100%");
+    //hideList("-100%");
     togglePlayerButton(id);
     displayMessage();
 }
